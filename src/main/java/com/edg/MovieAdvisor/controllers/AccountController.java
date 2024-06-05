@@ -25,6 +25,7 @@ public class AccountController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") User user, Model model) {
         userService.save(user);
-        return "redirect:/register?success";
+        model.addAttribute("registrationMessage", "Registrazione effettuata!");
+        return "confermaregistrazione.html";
     }
 }
