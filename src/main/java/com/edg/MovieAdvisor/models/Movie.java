@@ -1,6 +1,7 @@
 package com.edg.MovieAdvisor.models;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.hibernate.annotations.SQLJoinTableRestriction;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -35,4 +37,7 @@ public class Movie {
     @JoinColumn(name="director_id")
     @SQLJoinTableRestriction("role = 'DIRECTOR'")
     private Worker director;
+
+    @OneToMany(mappedBy = "movie")
+    private List<Review> reviews;
 }

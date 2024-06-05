@@ -38,5 +38,9 @@ public class Review {
     @ManyToOne
     @JoinColumn(name="op")
     private User op;
+
+    @ManyToOne
+    @JoinColumn(name="movie_id")
+    private Movie movie;
     
 }
