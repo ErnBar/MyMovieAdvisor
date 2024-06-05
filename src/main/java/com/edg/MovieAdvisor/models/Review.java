@@ -35,7 +35,6 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="op")
-    @Column(nullable = false)
     private User op;
     
 }
