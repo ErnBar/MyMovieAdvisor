@@ -1,0 +1,90 @@
+/* Reset dello stile predefinito */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stili per il body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Stili per il wrapper del login */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Stili per il container del form di login */
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Stili per l'intestazione del form di login */
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Stili per il form di login */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Stili per i gruppi di input */
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* Stili per gli input */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Stili per il pulsante di accesso */
+#login {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#login:hover {
+    background-color: #0056b3;
+}
+
+/* Stili per i messaggi di errore */
+.error-message {
+    margin-top: 10px;
+    color: #ff0000;
+    text-align: center;
+}
+
+/* Stili per i link di registrazione */
+.registration-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registration-links .registration-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.registration-links .registration-link:hover {
+    text-decoration: underline;
+}
