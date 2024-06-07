@@ -3,6 +3,7 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +34,6 @@ public class Worker {
     private String role;
 
     @Column(nullable = false)
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Movie> movies;
 }

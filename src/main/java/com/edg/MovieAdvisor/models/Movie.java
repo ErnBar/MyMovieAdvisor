@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.SQLJoinTableRestriction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,11 +34,11 @@ public class Movie {
     @Column(nullable = false)
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="director_id")
     @SQLJoinTableRestriction("role = 'DIRECTOR'")
     private Worker director;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 }
