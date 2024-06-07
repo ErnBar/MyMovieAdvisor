@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AccountController {
 
@@ -31,5 +33,44 @@ public class AccountController {
         }
         userService.save(user);
         return "confermaregistrazione.html";
+    }
+
+    @GetMapping("/userPanel")
+    public String userPanel(HttpSession session, Model model) {
+        if (session.getAttribute("logged") == null) {
+            return "redirect:/formLogin";
+        }
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "userPanel.html";
+    }
+
+    @PostMapping("/updateAccount")
+    public String updateAccount(@ModelAttribute("user") User updatedUser, HttpSession session) {
+        User originalUser = (User) session.getAttribute("user");
+        if (updatedUser.getUsername() != null) {
+            originalUser.setUsername(updatedUser.getUsername());
+        }
+        if (updatedUser.getDisplayname() != null) {
+            originalUser.setDisplayname(updatedUser.getDisplayname());
+        }
+        if (updatedUser.getEmail() != null) {
+            originalUser.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+            originalUser.setPassword(updatedUser.getPassword());
+        }
+        userService.save(originalUser);
+        session.setAttribute("user", originalUser);
+        return "redirect:/userPanel";
+    }
+
+    @PostMapping("/deleteAccount")
+    public String deleteAccount(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        userService.deleteById(user.getId());
+        session.removeAttribute("user");
+        session.removeAttribute("logged");
+        return "formLogin.html";
     }
 }
