@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form th:action="@{/register}" th:object="${user}" method="post">
+    <form th:action="@{/registeruser}" th:object="${user}" method="post">
         <div>
             <label for="username">Username:</label>
             <input type="text" id="username" th:field="*{username}" required>
@@ -26,9 +26,10 @@
         <div>
             <button type="submit">Register</button>
         </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
     </form>
-    <div th:if="${param.success}">
-        <p>Registration successful!</p>
-    </div>
+    <a href="/formLogin">Login</a>
 </body>
 </html>

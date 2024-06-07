@@ -3,6 +3,7 @@ package com.edg.MovieAdvisor.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +23,13 @@ public class AccountController {
         return "register.html";
     }
 
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, Model model) {
+    @PostMapping("/registeruser")
+    public String registerUser(@ModelAttribute("user") @Validated User user, Model model) {
+        if (userService.findByUsername(user.getUsername()).isPresent() || userService.findByEmail(user.getEmail()).isPresent()) {
+            model.addAttribute("error", "Email or username already exists");
+            return "register.html";
+        }
         userService.save(user);
-        model.addAttribute("registrationMessage", "Registrazione effettuata!");
         return "confermaregistrazione.html";
     }
 }

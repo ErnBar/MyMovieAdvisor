@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,11 +35,11 @@ public class Review {
     @Temporal(TemporalType.TIMESTAMP)
     private Date review_date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="op")
     private User op;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="movie_id")
     private Movie movie;
     

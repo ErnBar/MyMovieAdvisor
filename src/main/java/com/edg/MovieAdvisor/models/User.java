@@ -2,6 +2,7 @@ package com.edg.MovieAdvisor.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,19 +21,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true,nullable = false)
     private String username;
 
     @Column(nullable = false)
     private String displayname;
 
-    @Column(nullable = false)
+    @Column(unique = true,nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "op")
+    @OneToMany(mappedBy = "op", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
 
