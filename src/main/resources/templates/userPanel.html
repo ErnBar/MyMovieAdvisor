@@ -38,7 +38,7 @@
                     </li>
                 </ul>
             </div>
-            <div th:if="${reviews == null}">
+            <div th:if="${#lists.isEmpty(reviews)}">
                 <h3>No reviews found.</h3>
             </div>
         </div>
