@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edg.MovieAdvisor.models.User;
+import com.edg.MovieAdvisor.repositories.UserRepository;
 import com.edg.MovieAdvisor.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -81,27 +83,46 @@ public class AccountController {
         return "formLogin.html";
     }
 
+    // @PostMapping("/uploadProfilePicture")
+    // public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file, HttpSession session) {
+    //     User user = (User) session.getAttribute("user");
+    //     if (!file.isEmpty() && file.getContentType().equals("image/jpeg")) {
+    //         try {
+    //             // Ottieni il percorso assoluto della directory del progetto
+    //             String projectPath = System.getProperty("user.dir");
+    //             // Definisci il percorso dove salvare l'immagine del profilo
+    //             String uploadDir = projectPath + "/src/main/resources/static/user-photos/" + user.getId();
+    //             Path uploadPath = Paths.get(uploadDir);
+
+    //             // Crea la directory se non esiste
+    //             if (!Files.exists(uploadPath)) {
+    //                 Files.createDirectories(uploadPath);
+    //             }
+
+    //             String fileName = "profile.jpg";
+    //             Path filePath = uploadPath.resolve(fileName);
+
+    //             // Salva il file nel percorso definito
+    //             file.transferTo(filePath.toFile());
+
+    //         } catch (IOException e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+    //     return "redirect:/userPanel";
+    // }//metodo senza base64
+
     @PostMapping("/uploadProfilePicture")
     public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file, HttpSession session) {
         User user = (User) session.getAttribute("user");
+
         if (!file.isEmpty() && file.getContentType().equals("image/jpeg")) {
             try {
-                // Ottieni il percorso assoluto della directory del progetto
-                String projectPath = System.getProperty("user.dir");
-                // Definisci il percorso dove salvare l'immagine del profilo
-                String uploadDir = projectPath + "/src/main/resources/static/user-photos/" + user.getId();
-                Path uploadPath = Paths.get(uploadDir);
+                byte[] bytes = file.getBytes();
+                String base64Image = Base64.getEncoder().encodeToString(bytes);
 
-                // Crea la directory se non esiste
-                if (!Files.exists(uploadPath)) {
-                    Files.createDirectories(uploadPath);
-                }
-
-                String fileName = "profile.jpg";
-                Path filePath = uploadPath.resolve(fileName);
-
-                // Salva il file nel percorso definito
-                file.transferTo(filePath.toFile());
+                user.setProfilepicturebase64(base64Image);
+                userService.save(user);
 
             } catch (IOException e) {
                 e.printStackTrace();
