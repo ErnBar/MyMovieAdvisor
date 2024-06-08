@@ -34,9 +34,9 @@ public class Movie {
     @Column(nullable = false)
     private Date date;
 
+    //@SQLJoinTableRestriction("role = 'DIRECTOR'")
     @ManyToOne
     @JoinColumn(name="director_id")
-    @SQLJoinTableRestriction("role = 'DIRECTOR'")
     private Worker director;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
