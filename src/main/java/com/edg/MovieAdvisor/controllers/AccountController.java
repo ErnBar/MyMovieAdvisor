@@ -1,5 +1,10 @@
 package com.edg.MovieAdvisor.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.UserService;
@@ -72,5 +79,34 @@ public class AccountController {
         session.removeAttribute("user");
         session.removeAttribute("logged");
         return "formLogin.html";
+    }
+
+    @PostMapping("/uploadProfilePicture")
+    public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (!file.isEmpty() && file.getContentType().equals("image/jpeg")) {
+            try {
+                // Ottieni il percorso assoluto della directory del progetto
+                String projectPath = System.getProperty("user.dir");
+                // Definisci il percorso dove salvare l'immagine del profilo
+                String uploadDir = projectPath + "/src/main/resources/static/user-photos/" + user.getId();
+                Path uploadPath = Paths.get(uploadDir);
+
+                // Crea la directory se non esiste
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                String fileName = "profile.jpg";
+                Path filePath = uploadPath.resolve(fileName);
+
+                // Salva il file nel percorso definito
+                file.transferTo(filePath.toFile());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/userPanel";
     }
 }
