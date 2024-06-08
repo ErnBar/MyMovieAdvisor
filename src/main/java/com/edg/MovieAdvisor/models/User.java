@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -32,6 +33,10 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String profilepicturebase64;
 
     @OneToMany(mappedBy = "op", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;

@@ -19,9 +19,12 @@
             <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
         </ul>
         <div>
-            <div>
+            <!--<div>
                 <h3>Profile Picture</h3>
                 <img th:src="@{'/user-photos/' + ${user.id} + '/profile.jpg'}" alt="Profile Picture" width="150" height="150"/>
+            </div> metodo senza base64-->
+            <div>
+                <img th:src="'data:image/jpeg;base64,' + ${user.profilepicturebase64}" alt="Profile Picture" width="150" height="150"/>
             </div>
         </div>
     </div>
