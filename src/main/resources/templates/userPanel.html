@@ -9,25 +9,31 @@
     <nav>
         <h3><a href="/">Home</a></h3>
     </nav>
-    <h1>User Panel</h1>
-    <div>
-        <h2>Welcome, <span th:text="${user.displayname}"></span>!</h2>
-        <p>Your details:</p>
-        <ul>
-            <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
-            <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
-            <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
-        </ul>
-        <div>
+    <main>
+        <section class="user-info">
+            <h1>User Panel</h1>
+            <div class="welcome-message">
+                <h2>Welcome, <span th:text="${user.displayname}"></span>!</h2>
+                <p>Your details:</p>
+                <ul>
+                    <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
+                    <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
+                    <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
+                </ul>
+            </div>
+            <div class="profile-picture">
+                <h3>Profile Picture</h3>
+                <img th:src="'data:image/jpeg;base64,' + ${user.profilepicturebase64}" alt="Profile Picture" width="150" height="150"/>
+            </div>
             <!--<div>
                 <h3>Profile Picture</h3>
                 <img th:src="@{'/user-photos/' + ${user.id} + '/profile.jpg'}" alt="Profile Picture" width="150" height="150"/>
             </div> metodo senza base64-->
-            <div>
-                <img th:src="'data:image/jpeg;base64,' + ${user.profilepicturebase64}" alt="Profile Picture" width="150" height="150"/>
-            </div>
+        </section>
+        
+        <section class="reviews">
             <h2>Your Reviews</h2>
-            <div th:if="${reviews != null}">
+            <div th:if="${!#lists.isEmpty(reviews)}">
                 <ul>
                     <li th:each="review : ${reviews}">
                         <p>Review Date: <span th:text="${#dates.format(review.review_date, 'dd/MM/yyyy')}"></span></p>
@@ -41,48 +47,52 @@
             <div th:if="${#lists.isEmpty(reviews)}">
                 <h3>No reviews found.</h3>
             </div>
+        </section>
+
+        <section class="account-actions">
+            <h2>Update Account</h2>
+            <form th:action="@{/updateAccount}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" th:field="*{username}">
+                </div>
+                <div class="form-group">
+                    <label for="displayname">Display Name:</label>
+                    <input type="text" id="displayname" th:field="*{displayname}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="*{email}">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" th:field="*{password}">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Update Account</button>
+                </div>
+            </form>
+
+            <h2>Upload Profile Picture</h2>
+            <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="profilePicture">Choose a profile picture (JPG):</label>
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/jpeg">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Upload Picture</button>
+                </div>
+            </form>
+
+            <h2>Delete Account</h2>
+            <form th:action="@{/deleteAccount}" method="post">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
+            </form>
+        </section>
+        
+        <div class="logout">
+            <a href="/logout">Logout</a>
         </div>
-    </div>
-    <hr>
-    <h2>Update Account</h2>
-    <form th:action="@{/updateAccount}" th:object="${user}" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" th:field="*{username}">
-        </div>
-        <div>
-            <label for="displayname">Display Name:</label>
-            <input type="text" id="displayname" th:field="*{displayname}">
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" th:field="*{email}">
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" th:field="*{password}">
-        </div>
-        <div>
-            <button type="submit">Update Account</button>
-        </div>
-    </form>
-    <hr>
-    <h2>Upload Profile Picture</h2>
-    <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="profilePicture">Choose a profile picture (JPG):</label>
-            <input type="file" id="profilePicture" name="profilePicture" accept="image/jpeg">
-        </div>
-        <div>
-            <button type="submit">Upload Picture</button>
-        </div>
-    </form>
-    <hr>
-    <h2>Delete Account</h2>
-    <form th:action="@{/deleteAccount}" method="post">
-        <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
-    </form>
-    <hr>
-    <a href="/logout">Logout</a>
+    </main>
 </body>
 </html>
