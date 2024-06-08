@@ -34,6 +34,9 @@ public class Movie {
     @Column(nullable = false)
     private Date date;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String moviepicturebase64;
+
     //@SQLJoinTableRestriction("role = 'DIRECTOR'")
     @ManyToOne
     @JoinColumn(name="director_id")

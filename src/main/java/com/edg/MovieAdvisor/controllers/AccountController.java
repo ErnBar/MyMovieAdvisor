@@ -50,7 +50,15 @@ public class AccountController {
             return "redirect:/formLogin";
         }
         User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
+        if (user != null) {
+            // Recupera le recensioni dell'utente
+            user = userService.findById(user.getId());
+
+            if (user != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("reviews", user.getReviews());
+            }
+        }
         return "userPanel.html";
     }
 

@@ -26,6 +26,21 @@
             <div>
                 <img th:src="'data:image/jpeg;base64,' + ${user.profilepicturebase64}" alt="Profile Picture" width="150" height="150"/>
             </div>
+            <h2>Your Reviews</h2>
+            <div th:if="${reviews != null}">
+                <ul>
+                    <li th:each="review : ${reviews}">
+                        <p>Review Date: <span th:text="${#dates.format(review.review_date, 'dd/MM/yyyy')}"></span></p>
+                        <p>Score: <span th:text="${review.score}"></span></p>
+                        <p>Text: <span th:text="${review.text}"></span></p>
+                        <p>Movie: <span th:text="${review.movie.title}"></span></p>
+                        <hr/>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${reviews == null}">
+                <h3>No reviews found.</h3>
+            </div>
         </div>
     </div>
     <hr>
