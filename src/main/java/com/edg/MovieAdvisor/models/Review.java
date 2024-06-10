@@ -35,11 +35,11 @@ public class Review {
     @Temporal(TemporalType.TIMESTAMP)
     private Date review_date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="op")
     private User op;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="movie_id")
     private Movie movie;
     

@@ -29,7 +29,7 @@
                     <td th:text="${user.username}"></td>
                     <td><a th:href="@{'/userPanel?displayname=' + ${user.displayname}}" th:text=${user.displayname}></a></td>
                     <td th:text="${user.email}"></td>
-                    <td th:text="${#dates.format(user.registrationdate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${#dates.format(user.registrationdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td>
                         <form th:action="@{/deleteUser}" method="post">
                             <input type="hidden" name="userId" th:value="${user.id}">
