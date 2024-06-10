@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edg.MovieAdvisor.models.User;
-import com.edg.MovieAdvisor.repositories.UserRepository;
 import com.edg.MovieAdvisor.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -45,20 +45,24 @@ public class AccountController {
     }
 
     @GetMapping("/userPanel")
-    public String userPanel(HttpSession session, Model model) {
+    public String userPanel(@RequestParam("displayname") String displayName, HttpSession session, Model model) {
         if (session.getAttribute("logged") == null) {
             return "redirect:/formLogin";
         }
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            // Recupera le recensioni dell'utente
-            user = userService.findById(user.getId());
-
-            if (user != null) {
-                model.addAttribute("user", user);
-                model.addAttribute("reviews", user.getReviews());
-            }
+        User loggedUser = (User) session.getAttribute("user");
+        boolean userlog=false;
+        
+        User user = userService.findByDisplayname(displayName);
+        if (loggedUser.getUsername().equalsIgnoreCase(user.getUsername())) {
+            userlog=true;
+            
         }
+        model.addAttribute("userlog", userlog);
+        model.addAttribute("user", user);
+        model.addAttribute("reviews", user.getReviews());
+        System.out.println(loggedUser.getUsername());
+        System.out.println(user.getUsername());
+        System.out.println(userlog);
         return "userPanel.html";
     }
 
@@ -79,7 +83,7 @@ public class AccountController {
         }
         userService.save(originalUser);
         session.setAttribute("user", originalUser);
-        return "redirect:/userPanel";
+        return "redirect:/userPanel?displayname="+originalUser.getDisplayname();
     }
 
     @PostMapping("/deleteAccount")
@@ -136,6 +140,6 @@ public class AccountController {
                 e.printStackTrace();
             }
         }
-        return "redirect:/userPanel";
+        return "redirect:/userPanel?displayname="+user.getDisplayname();
     }
 }

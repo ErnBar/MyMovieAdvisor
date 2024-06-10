@@ -27,7 +27,7 @@
                 <tr th:each="user : ${users}">
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.username}"></td>
-                    <td th:text="${user.displayname}"></td>
+                    <td><a th:href="@{'/userPanel?displayname=' + ${user.displayname}}" th:text=${user.displayname}></a></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${#dates.format(user.registrationdate, 'yyyy-MM-dd')}"></td>
                     <td>

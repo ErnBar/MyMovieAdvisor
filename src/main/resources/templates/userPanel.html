@@ -13,8 +13,8 @@
         <section class="user-info">
             <h1>User Panel</h1>
             <div class="welcome-message">
-                <h2>Welcome, <span th:text="${user.displayname}"></span>!</h2>
-                <p>Your details:</p>
+                <h2 th:if="${userlog}">Welcome, <span th:text="${user.displayname}"></span>!</h2>
+                <p>User details:</p>
                 <ul>
                     <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
                     <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
@@ -50,7 +50,7 @@
             </div>
         </section>
 
-        <section class="account-actions">
+        <section class="account-actions" th:if="${userlog}">
             <h2>Update Account</h2>
             <form th:action="@{/updateAccount}" th:object="${user}" method="post">
                 <div class="form-group">
