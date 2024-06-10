@@ -65,9 +65,6 @@ public class AccountController {
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
         model.addAttribute("reviews", user.getReviews());
-        System.out.println(loggedUser.getUsername());
-        System.out.println(user.getUsername());
-        System.out.println(userlog);
         return "userPanel.html";
     }
 

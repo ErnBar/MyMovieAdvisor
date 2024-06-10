@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -38,9 +40,13 @@ public class Movie {
     private String moviepicturebase64;
 
     //@SQLJoinTableRestriction("role = 'DIRECTOR'")
-    @ManyToOne
-    @JoinColumn(name="director_id")
-    private Worker director;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "movie_worker",
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "worker_id")
+    )
+    private List<Worker> workers;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
