@@ -11,6 +11,7 @@
             <div class="links">
                 <div class="user-panel">
                     <h3><a href="/userPanel" th:text="${actualUser}"></a></h3>
+                    <h3 th:if="${isAdmin}"><a href="/usersList">UsersList</a></h3>
                     <a href="/logout">Logout</a>
                 </div>
             </div>
