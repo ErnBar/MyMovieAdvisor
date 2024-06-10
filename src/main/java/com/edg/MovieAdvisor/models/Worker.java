@@ -33,7 +33,6 @@ public class Worker {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
     @OneToMany(mappedBy = "director", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Movie> movies;
 }
