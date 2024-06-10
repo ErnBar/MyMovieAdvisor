@@ -23,14 +23,22 @@ public class AppController {
     @GetMapping("/")
     public String home(HttpSession session,Model model){
         String actualUser="";
+        boolean isAdmin=false;
         if (session.getAttribute("logged")==null) {
             return "redirect:/formLogin";
         }else {
             Object utente = session.getAttribute("user");
             if (utente!=null && utente instanceof User) {
                 User u = (User) utente;
-                actualUser += u.getDisplayname();
+                if (!u.getUsername().equalsIgnoreCase("admin")) {
+                    actualUser += u.getDisplayname();
+                }
+                else {
+                    isAdmin=true;
+                }
+                
             }
+            model.addAttribute("isAdmin", isAdmin);
             model.addAttribute("actualUser", actualUser);
             return "main.html";
         }

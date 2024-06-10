@@ -19,6 +19,7 @@
                     <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
                     <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
                     <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
+                    <li><strong>RegistrationDate:</strong><span th:text="${#dates.format(user.registrationdate, 'dd/MM/yyyy')}"></span></li>
                 </ul>
             </div>
             <div class="profile-picture">

@@ -1,6 +1,9 @@
 package com.edg.MovieAdvisor.models;
 
+import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -24,6 +29,10 @@ public class User {
 
     @Column(unique = true,nullable = false)
     private String username;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registrationdate;
 
     @Column(nullable = false)
     private String displayname;
