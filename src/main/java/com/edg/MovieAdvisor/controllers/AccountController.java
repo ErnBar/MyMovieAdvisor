@@ -57,6 +57,11 @@ public class AccountController {
             userlog=true;
             
         }
+        boolean admin=false;
+        if (loggedUser.getUsername().equalsIgnoreCase("admin")) {
+            admin=true;
+        }
+        model.addAttribute("admin", admin);
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
         model.addAttribute("reviews", user.getReviews());
