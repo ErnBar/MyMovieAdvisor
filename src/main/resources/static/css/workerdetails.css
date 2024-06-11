@@ -1,0 +1,182 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.welcome-message ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.welcome-message ul li {
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.reviews ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reviews ul li {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.account-actions {
+    margin-top: 20px;
+}
+
+.account-actions .form-group {
+    margin-bottom: 15px;
+}
+
+.account-actions .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.account-actions .form-group input {
+    width: calc(100% - 30px); /* Sottrai il padding */
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.account-actions .form-group button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-actions .form-group button:hover {
+    background-color: #0056b3;
+}
+
+.logout {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}
+
+#listLink{
+    margin-left: 93%;
+    margin-top: -35px;
+}
+
+.update-profile-picture {
+    margin-top: 20px;
+}
+
+.update-profile-picture h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.update-profile-picture form {
+    margin-top: 10px;
+}
+
+.update-profile-picture form input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.update-profile-picture form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-profile-picture form button:hover {
+    background-color: #0056b3;
+}
+
+.update-worker {
+    margin-top: 40px;
+}
+
+.update-worker h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.update-worker form {
+    margin-top: 10px;
+}
+
+.update-worker form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.update-worker form input[type="text"],
+.update-worker form input[type="date"],
+.update-worker form select {
+    width: calc(100% - 10px); /* Sottrai il margine */
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.update-worker form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-worker form button:hover {
+    background-color: #0056b3;
+}
+
