@@ -44,7 +44,7 @@ public class User {
     private String password;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] profilepicture;
 
     @OneToMany(mappedBy = "op", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -57,7 +57,10 @@ public class AccountController {
         if (loggedUser.getUsername().equalsIgnoreCase("admin")) {
             admin=true;
         }
-        String pfp = Base64.getEncoder().encodeToString(user.getProfilepicture());
+        String pfp = "";
+        if (user.getProfilepicture() != null) {
+            pfp = Base64.getEncoder().encodeToString(user.getProfilepicture());
+        }
         model.addAttribute("admin", admin);
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
@@ -128,7 +131,7 @@ public class AccountController {
     public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file, HttpSession session) {
         User user = (User) session.getAttribute("user");
 
-        if (!file.isEmpty() && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/jpeg"))) {
+        if (!file.isEmpty() && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png"))) {
             try {
                 user.setProfilepicture(file.getBytes());
                 userService.save(user);
