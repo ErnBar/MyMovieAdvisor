@@ -1,10 +1,7 @@
 package com.edg.MovieAdvisor.services;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.edg.MovieAdvisor.models.Worker;
 import com.edg.MovieAdvisor.repositories.WorkerRepository;
 
@@ -30,5 +27,7 @@ public class WorkerService {
         workerRepository.deleteById(id);
     }
 
-    
+    public Worker findByName(String name) {
+        return workerRepository.findByName(name);
+    }
 }

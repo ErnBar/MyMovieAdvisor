@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="/css/workerdetails.css">
+    <style>
+        /* Aggiungi qui eventuali stili aggiuntivi */
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <h3><a href="/">Home</a></h3>
+            <h3 id="listLink" th:if="${admin}"><a href="/workersList">WorkersList</a></h3>
+        </div>
+    </nav>
+
+    <main>
+        <section class="user-info">
+            <div class="welcome-message">
+                <p>Worker details:</p>
+                <div class="profile-picture">
+                    <h3>Worker Picture</h3>
+                    <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
+                </div>
+                <ul>
+                    <li th:if="${admin}"><strong>ID:</strong><span th:text="${worker.id}"></span></li>
+                    <li><strong>Name:</strong> <span th:text="${worker.name}"></span></li>
+                    <li><strong>BirthDay:</strong> <span th:text="${worker.birthday}"></span></li>
+                    <li><strong>Nationality:</strong> <span th:text="${worker.nationality}"></span></li>
+                    <li><strong>Role:</strong> <span th:text="${worker.role}"></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="update-profile-picture" th:if="${admin}">
+            <h2>Update Profile Picture</h2>
+            <form th:action="@{/uploadWorkerPicture}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="workerId" th:value="${worker.id}"/>
+                <input type="file" name="profilePicture" accept="image/*" required/>
+                <button type="submit">Upload Picture</button>
+            </form>
+        </section>
+
+        <section class="update-worker" th:if="${admin}">
+            <h2>Update Worker</h2>
+            <form th:action="@{/workerUpdate}" method="post">
+                <input type="hidden" name="id" th:value="${worker.id}"/>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" th:value="${worker.name}" required/>
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday" th:value="${worker.birthday}" required/>
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" name="nationality" th:value="${worker.nationality}" required/>
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="director" th:selected="${worker.role == 'director'}">Director</option>
+                    <option value="actor" th:selected="${worker.role == 'actor'}">Actor</option>
+                </select>
+                <button type="submit">Update Worker</button>
+            </form>
+        </section>
+        
+    </main>
+    <div class="logout">
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

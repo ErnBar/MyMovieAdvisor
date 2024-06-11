@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -36,8 +37,9 @@ public class Movie {
     @Column(nullable = false)
     private Date date;
 
-    @Column(columnDefinition = "LONGTEXT")
-    private String moviepicturebase64;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] moviepicture;
 
     //@SQLJoinTableRestriction("role = 'DIRECTOR'")
     @ManyToMany(cascade = CascadeType.ALL)
