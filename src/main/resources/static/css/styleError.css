@@ -1,0 +1,68 @@
+body {
+    background-image: url('https://www.zeezome.com/wp-content/uploads/2022/12/thumb_italian_2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    color: red;
+    font-size: 48px;
+}
+
+h3 {
+    color: #e10d0d;
+    font-size: 24px;
+}
+
+a {
+    display: block;
+    width: max-content;
+    padding: 10px 15px;
+    background-color: #e10d0d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+a:hover {
+    background-color: #e10d0d;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Nascondi il modal per impostazione predefinita */
+    position: fixed; /* Posizionamento fisso per sovrapporre il modal al contenuto */
+    z-index: 1; /* Imposta la profondità dello z-index per assicurarsi che il modal sia visibile sopra il resto del contenuto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Sfondo semi-trasparente */
+}
+
+/* Contenitore del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centra verticalmente e orizzontalmente il modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px; /* Imposta una larghezza massima per il modal */
+    text-align: center;
+}
+
+/* Stili per il pulsante di avvio */
+#startAudio {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#startAudio:hover {
+    background-color: #45a049;
+}

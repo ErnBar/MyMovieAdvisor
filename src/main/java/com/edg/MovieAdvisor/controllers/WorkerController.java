@@ -40,7 +40,7 @@ public class WorkerController {
         
         Worker worker = workerService.findByName(Name);
         if (worker==null) {
-            return "error.html";
+            return "redirect:/error";
         }
         boolean admin=false;
         if (loggedUser.getUsername().equalsIgnoreCase("admin")) {

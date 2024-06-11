@@ -75,5 +75,10 @@ public class AppController {
         session.setAttribute("user", null);
         return "redirect:/";
     }
+
+    @GetMapping("/error")
+    public String error(){
+        return "error.html";
+    }
     
 }

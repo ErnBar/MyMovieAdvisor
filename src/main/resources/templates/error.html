@@ -3,10 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/styleError.css" type="text/css">
+    <title>Error</title>
 </head>
 <body>
-    <h1>ERRORE</h1>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Errore</h2>
+            <p>The search was unsuccessful.</p>
+            <button id="startAudio">Close</button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <h1>Errore</h1>
+    <audio controls name="myAudio" id="myAudio" style="display: none;">
+        <source src="/audio/rispettiledonne.mp3" type="audio/mpeg">
+    </audio>
     <a href="/">Home</a>
+
+    <script>
+        // Funzione per avviare l'audio
+        function startAudio() {
+            var audio = document.getElementById('myAudio');
+            audio.play();
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Mostra il modal quando la pagina è completamente caricata
+        window.addEventListener('load', function() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            document.getElementById('startAudio').addEventListener('click', startAudio);
+        });
+    </script>
 </body>
 </html>

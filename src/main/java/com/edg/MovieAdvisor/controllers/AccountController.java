@@ -50,7 +50,7 @@ public class AccountController {
         
         User user = userService.findByDisplayname(displayName);
         if (user==null) {
-            return "error.html";
+            return "redirect:/error";
         }
         if (loggedUser.getUsername().equalsIgnoreCase(user.getUsername())) {
             userlog=true;
