@@ -43,9 +43,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-
-    @Column(columnDefinition = "LONGTEXT")
-    private String profilepicturebase64;
+    @Lob
+    @Column(columnDefinition = "BLOB")
+    private byte[] profilepicture;
 
     @OneToMany(mappedBy = "op", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;

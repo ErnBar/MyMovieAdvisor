@@ -43,6 +43,9 @@ h1, h2, h3 {
 
 .profile-picture img {
     border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
 
 .reviews ul {

@@ -28,7 +28,7 @@
             </div>
             <div class="profile-picture">
                 <h3>Profile Picture</h3>
-                <img th:src="'data:image/jpeg;base64,' + ${user.profilepicturebase64}" alt="Profile Picture" width="150" height="150"/>
+                <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
             </div>
             <!--<div>
                 <h3>Profile Picture</h3>
@@ -82,7 +82,7 @@
             <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="profilePicture">Choose a profile picture (JPG):</label>
-                    <input type="file" id="profilePicture" name="profilePicture" accept="image/jpeg">
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
                 </div>
                 <div class="form-group">
                     <button type="submit">Upload Picture</button>

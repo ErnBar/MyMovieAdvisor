@@ -1,11 +1,7 @@
 package com.edg.MovieAdvisor.controllers;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Base64;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +45,7 @@ public class AccountController {
         if (session.getAttribute("logged") == null) {
             return "redirect:/formLogin";
         }
-        User loggedUser = (User) session.getAttribute("user");
+        User loggedUser = (User)session.getAttribute("user");
         boolean userlog=false;
         
         User user = userService.findByDisplayname(displayName);
@@ -61,9 +57,11 @@ public class AccountController {
         if (loggedUser.getUsername().equalsIgnoreCase("admin")) {
             admin=true;
         }
+        String pfp = Base64.getEncoder().encodeToString(user.getProfilepicture());
         model.addAttribute("admin", admin);
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
+        model.addAttribute("pfp", pfp);
         model.addAttribute("reviews", user.getReviews());
         return "userPanel.html";
     }
@@ -130,13 +128,16 @@ public class AccountController {
     public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file, HttpSession session) {
         User user = (User) session.getAttribute("user");
 
-        if (!file.isEmpty() && file.getContentType().equals("image/jpeg")) {
+        if (!file.isEmpty() && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/jpeg"))) {
             try {
-                byte[] bytes = file.getBytes();
-                String base64Image = Base64.getEncoder().encodeToString(bytes);
-
-                user.setProfilepicturebase64(base64Image);
+                user.setProfilepicture(file.getBytes());
                 userService.save(user);
+                
+                // byte[] bytes = file.getBytes();
+                // String base64Image = Base64.getEncoder().encodeToString(bytes);
+
+                // user.setProfilepicturebase64(base64Image);
+                // userService.save(user);
 
             } catch (IOException e) {
                 e.printStackTrace();
