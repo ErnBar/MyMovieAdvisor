@@ -49,6 +49,9 @@ public class AccountController {
         boolean userlog=false;
         
         User user = userService.findByDisplayname(displayName);
+        if (user==null) {
+            return "error.html";
+        }
         if (loggedUser.getUsername().equalsIgnoreCase(user.getUsername())) {
             userlog=true;
             
