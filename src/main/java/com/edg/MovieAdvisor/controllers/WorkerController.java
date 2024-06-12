@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.models.Worker;
-import com.edg.MovieAdvisor.services.UserService;
 import com.edg.MovieAdvisor.services.WorkerService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WorkerController {
-
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private WorkerService workerService;
 

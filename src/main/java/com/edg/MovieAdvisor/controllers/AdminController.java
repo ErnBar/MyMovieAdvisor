@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.edg.MovieAdvisor.models.User;
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.Worker;
+import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
 import com.edg.MovieAdvisor.services.WorkerService;
 
@@ -24,13 +25,14 @@ public class AdminController {
     @Autowired
     private WorkerService workerService;
 
+    @Autowired
+    private MovieService movieService;
+
     @GetMapping("/usersList")
     public String usersList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "usersList";
     }
-
-    
 
     @PostMapping("/deleteUser")
     public String deleteUser(@ModelAttribute("userId") Long userId) {
@@ -38,7 +40,6 @@ public class AdminController {
         return "redirect:/usersList";
     }
 
-    
 
     @GetMapping("/workersList")
     public String workersList(Model model, HttpSession session) {
@@ -60,5 +61,22 @@ public class AdminController {
     }
 
     
-    
+    @GetMapping("/moviesList")
+    public String moviesList(Model model, HttpSession session) {
+        model.addAttribute("movies", movieService.findAll());
+        model.addAttribute("movie", new Movie());
+        return "moviesList";
+    }
+
+    @PostMapping("/movieAdd")
+    public String addMovie(@ModelAttribute("movie") @Validated Movie movie, Model model) {
+        movieService.save(movie);
+        return "redirect:/moviesList";
+    }
+
+    @PostMapping("/deleteMovie")
+    public String deleteMovie(@ModelAttribute("movieId") Long movieId) {
+        movieService.deleteById(movieId);
+        return "redirect:/moviesList";
+    }
 }

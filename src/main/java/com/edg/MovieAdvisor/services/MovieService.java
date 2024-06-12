@@ -22,6 +22,10 @@ public class MovieService {
         return movieRepository.findById(id).orElse(null);
     }
 
+    public Movie findByTitle(String title) {
+        return movieRepository.findByTitle(title);
+    }
+
     public Movie save(Movie movie) {
         return movieRepository.save(movie);
     }
