@@ -29,6 +29,18 @@
                     <li><strong>Name:</strong> <span th:text="${director.name}"></span></li>
                     <li><strong>BirthDay:</strong> <span th:text="${director.birthday}"></span></li>
                     <li><strong>Nationality:</strong> <span th:text="${director.nationality}"></span></li>
+                    <h2>Movies</h2>
+            <div th:if="${!#lists.isEmpty(movies)}">
+                <ul>
+                    <li th:each="movie : ${movies}">
+                        <p><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></p>
+                        <hr/>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${#lists.isEmpty(reviews)}">
+                <h3>No movies found.</h3>
+            </div>
                 </ul>
             </div>
         </section>

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.edg.MovieAdvisor.models.Director;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.DirectorService;
+import com.edg.MovieAdvisor.services.MovieService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +25,9 @@ import jakarta.servlet.http.HttpSession;
 public class DirectorController {
     @Autowired
     private DirectorService directorService;
+
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/directorDetail")
     public String directorPanel(@RequestParam("name") String Name, HttpSession session, Model model) {
@@ -48,6 +52,7 @@ public class DirectorController {
         model.addAttribute("director", director);
         model.addAttribute("admin", admin);
         model.addAttribute("pfp", pfp);
+        model.addAttribute("movies", director.getMovies());
         return "directorDetail.html";
     }
 

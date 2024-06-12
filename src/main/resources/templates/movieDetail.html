@@ -27,6 +27,7 @@
                 <ul>
                     <li th:if="${admin}"><strong>ID:</strong><span th:text="${movie.id}"></span></li>
                     <li><strong>Title:</strong> <span th:text="${movie.title}"></span></li>
+                    <li><strong>Director:</strong><span th:if="${director!=null}"><a th:href="@{'/directorDetail?name=' + ${director.name}}" th:text=${director.name}></a></span></li>
                     <li><strong>Date:</strong> <span th:text="${movie.date}"></span></li>
                     <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
                 </ul>
@@ -53,6 +54,17 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
                 <button type="submit">Update movie</button>
+            </form>
+        </section>
+        <section class="associate-director" th:if="${admin}">
+            <h2>Associate Director</h2>
+            <form th:action="@{/directorAssociation}" method="post">
+                <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                <label for="directorName">Director:</label>
+                <select id="directorName" name="directorName" required>
+                    <option th:each="director : ${directors}" th:value="${director.name}" th:text="${director.name}"></option>
+                </select>
+                <button type="submit">Associate Director</button>
             </form>
         </section>
         
