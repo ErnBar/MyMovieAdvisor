@@ -3,8 +3,6 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
-import org.hibernate.annotations.SQLJoinTableRestriction;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,14 +39,17 @@ public class Movie {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] moviepicture;
 
-    //@SQLJoinTableRestriction("role = 'DIRECTOR'")
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "movie_worker",
+        name = "movie_actor",
         joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "worker_id")
+        inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    private List<Worker> workers;
+    private List<Actor> actors;
+
+    @ManyToOne
+    @JoinColumn(name="director_id")
+    private Director director;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;

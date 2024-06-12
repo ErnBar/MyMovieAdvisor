@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actors List</title>
+    <link rel="stylesheet" href="/css/actorList.css">
+</head>
+<body>
+    <nav>
+        <h3><a href="/">Home</a></h3>
+        <h3><a href="/logout">Logout</a></h3>
+        <h3><a href="/usersList">UsersList</a></h3>
+        <h3><a href="/moviesList">Movie List</a></h3>
+    </nav>
+    <h1>Actors List</h1>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Nationality</th>
+                    <th>DeleteActor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="actor : ${actors}">
+                    <td th:text="${actor.id}"></td>
+                    <td><a th:href="@{'/actorDetail?name=' + ${actor.name}}" th:text=${actor.name}></a></td>
+                    <td th:text="${actor.birthday}"></td>
+                    <td th:text="${actor.nationality}"></td>
+                    <td>
+                        <form th:action="@{/deleteActor}" method="post">
+                            <input type="hidden" name="actorId" th:value="${actor.id}">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this actor?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Actors Add</h1>
+    <form th:action="@{/actoradd}" th:object="${actor}" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div>
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" th:field="*{birthday}" required>
+        </div>
+        <div>
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" th:field="*{nationality}" required>
+        </div>
+        <div>
+            <button type="submit">Add Actor</button>
+        </div>
+    </form>
+</body>
+</html>

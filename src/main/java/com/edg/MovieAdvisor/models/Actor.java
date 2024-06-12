@@ -11,14 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "workers")
-public class Worker {
+@Table(name = "actors")
+public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,13 +31,10 @@ public class Worker {
     @Column(nullable = false)
     private String nationality;
 
-    @Column(nullable = false)
-    private String role;
-
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] profilepicture;
 
-    @ManyToMany(mappedBy = "workers", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
     private List<Movie> movies;
 }

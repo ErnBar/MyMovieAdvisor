@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.edg.MovieAdvisor.models.Actor;
+import com.edg.MovieAdvisor.models.Director;
 import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.User;
-import com.edg.MovieAdvisor.models.Worker;
+import com.edg.MovieAdvisor.services.ActorService;
+import com.edg.MovieAdvisor.services.DirectorService;
 import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
-import com.edg.MovieAdvisor.services.WorkerService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,10 +26,14 @@ public class AdminController {
     private UserService userService;
 
     @Autowired
-    private WorkerService workerService;
+    private ActorService actorService;
+
+    @Autowired
+    private DirectorService directorService;
 
     @Autowired
     private MovieService movieService;
+    
 
     @GetMapping("/usersList")
     public String usersList(Model model) {
@@ -42,26 +48,49 @@ public class AdminController {
     }
 
 
-    @GetMapping("/workersList")
-    public String workersList(Model model, HttpSession session) {
-        model.addAttribute("workers", workerService.findAll());
-        model.addAttribute("worker", new Worker());
-        return "workersList";
+
+    @GetMapping("/actorsList")
+    public String actorsList(Model model, HttpSession session) {
+        model.addAttribute("actors", actorService.findAll());
+        model.addAttribute("actor", new Actor());
+        return "actorsList";
     }
 
-    @PostMapping("/workeradd")
-    public String addWorker(@ModelAttribute("worker") @Validated Worker worker, Model model) {
-        workerService.save(worker);
-        return "redirect:/workersList";
+    @PostMapping("/actoradd")
+    public String addActor(@ModelAttribute("actor") @Validated Actor actor, Model model) {
+        actorService.save(actor);
+        return "redirect:/actorsList";
     }
 
-    @PostMapping("/deleteWorker")
-    public String deleteWorker(@ModelAttribute("workerId") Long workerId) {
-        workerService.deleteById(workerId);
-        return "redirect:/workersList";
+    @PostMapping("/deleteActor")
+    public String deleteActor(@ModelAttribute("actorId") Long actorId) {
+        actorService.deleteById(actorId);
+        return "redirect:/actorsList";
+    }
+
+
+    
+    @GetMapping("/directorsList")
+    public String directorsList(Model model, HttpSession session) {
+        model.addAttribute("directors", directorService.findAll());
+        model.addAttribute("director", new Director());
+        return "directorsList";
+    }
+
+    @PostMapping("/directorAdd")
+    public String addDirector(@ModelAttribute("director") @Validated Director director, Model model) {
+        directorService.save(director);
+        return "redirect:/directorsList";
+    }
+
+    @PostMapping("/deleteDirector")
+    public String deleteDirector(@ModelAttribute("directorId") Long directorId) {
+        directorService.deleteById(directorId);
+        return "redirect:/directorsList";
     }
 
     
+
     @GetMapping("/moviesList")
     public String moviesList(Model model, HttpSession session) {
         boolean isAdmin=true;

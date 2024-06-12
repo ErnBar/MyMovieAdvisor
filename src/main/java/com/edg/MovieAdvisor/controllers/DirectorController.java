@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.edg.MovieAdvisor.models.Director;
 import com.edg.MovieAdvisor.models.User;
-import com.edg.MovieAdvisor.models.Worker;
-import com.edg.MovieAdvisor.services.WorkerService;
+import com.edg.MovieAdvisor.services.DirectorService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class WorkerController {
+public class DirectorController {
     @Autowired
-    private WorkerService workerService;
+    private DirectorService directorService;
 
-    @GetMapping("/workerDetail")
-    public String workerPanel(@RequestParam("name") String Name, HttpSession session, Model model) {
+    @GetMapping("/directorDetail")
+    public String directorPanel(@RequestParam("name") String Name, HttpSession session, Model model) {
         if (session.getAttribute("logged") == null) {
             return "redirect:/formLogin";
         }
         User loggedUser = (User)session.getAttribute("user");
         
         
-        Worker worker = workerService.findByName(Name);
-        if (worker==null) {
+        Director director = directorService.findByName(Name);
+        if (director==null) {
             return "redirect:/error";
         }
         boolean admin=false;
@@ -42,53 +42,48 @@ public class WorkerController {
             admin=true;
         }
         String pfp = "";
-        if (worker.getProfilepicture() != null) {
-            pfp = Base64.getEncoder().encodeToString(worker.getProfilepicture());
+        if (director.getProfilepicture() != null) {
+            pfp = Base64.getEncoder().encodeToString(director.getProfilepicture());
         }
-        model.addAttribute("worker", worker);
+        model.addAttribute("director", director);
         model.addAttribute("admin", admin);
         model.addAttribute("pfp", pfp);
-        return "workerDetail.html";
+        return "directorDetail.html";
     }
 
-    @PostMapping("/uploadWorkerPicture")
-    public String uploadProfilePicture(@RequestParam("workerId") Long workerId, @RequestParam("profilePicture") MultipartFile file, HttpSession session) {
+    @PostMapping("/uploadDirectorPicture")
+    public String uploadProfilePicture(@RequestParam("directorId") Long directorId, @RequestParam("profilePicture") MultipartFile file, HttpSession session) {
         if (session.getAttribute("logged") == null) {
             return "redirect:/formLogin";
         }
         if (!file.isEmpty() && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png"))) {
             try {
-                Worker worker = workerService.findById(workerId);
-                if (worker != null) {
-                    worker.setProfilepicture(file.getBytes());
-                    workerService.save(worker);
+                Director director = directorService.findById(directorId);
+                if (director != null) {
+                    director.setProfilepicture(file.getBytes());
+                    directorService.save(director);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/workerDetail?name=" + workerService.findById(workerId).getName();
+        return "redirect:/directorDetail?name=" + directorService.findById(directorId).getName();
     }
 
-    @PostMapping("/workerUpdate")
-    public String updateWorker(@RequestParam("id") Long id, @RequestParam("name") String name,
-                            @RequestParam("birthday") String birthday, @RequestParam("nationality") String nationality,
-                            @RequestParam("role") String role) {
+    @PostMapping("/directorUpdate")
+    public String updateDirector(@RequestParam("id") Long id, @RequestParam("name") String name,
+                            @RequestParam("birthday") String birthday, @RequestParam("nationality") String nationality) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(birthday, formatter);
         Date date = Date.valueOf(localDate);
-        Worker worker = workerService.findById(id);
-        if (worker != null) {
-            worker.setName(name);
-            worker.setBirthday(date); 
-            worker.setNationality(nationality);
-            worker.setRole(role);
-            workerService.save(worker);
+        Director director = directorService.findById(id);
+        if (director != null) {
+            director.setName(name);
+            director.setBirthday(date); 
+            director.setNationality(nationality);
+            directorService.save(director);
         }
-        return "redirect:/workerDetail?name=" + name;
+        return "redirect:/directorDetail?name=" + name;
     }
 
-
-    
-    
 }

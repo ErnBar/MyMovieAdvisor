@@ -52,11 +52,6 @@
                 <input type="date" id="date" name="date" th:value="${movie.date}" required/>
                 <label for="description">Description:</label>
                 <input type="text" id="description" name="description" th:value="${movie.description}" required/>
-                <!-- <label for="role">Role:</label>
-                <select id="role" name="role" required>
-                    <option value="director" th:selected="${movie.role == 'director'}">Director</option>
-                    <option value="actor" th:selected="${movie.role == 'actor'}">Actor</option>
-                </select> -->
                 <button type="submit">Update movie</button>
             </form>
         </section>
