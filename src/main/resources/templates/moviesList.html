@@ -27,7 +27,7 @@
             <tbody>
                 <tr th:each="movie : ${movies}">
                     <td th:text="${movie.id}"></td>
-                    <td><a th:href="@{'/movieDetail?name=' + ${movie.title}}" th:text=${movie.title}></a></td>
+                    <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></td>
                     <td th:text="${movie.description}"></td>
                     <td th:text="${movie.date}"></td>
                     <td th:if="${isAdmin}">

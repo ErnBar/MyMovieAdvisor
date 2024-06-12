@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Panel</title>
-    <link rel="stylesheet" href="/css/workerdetails.css">
+    <link rel="stylesheet" href="/css/details.css">
     <style>
         /* Aggiungi qui eventuali stili aggiuntivi */
     </style>
@@ -20,7 +20,7 @@
         <section class="user-info">
             <div class="welcome-message">
                 <p>Worker details:</p>
-                <div class="profile-picture">
+                <div class="picture">
                     <h3>Worker Picture</h3>
                     <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
                 </div>
@@ -34,7 +34,7 @@
             </div>
         </section>
 
-        <section class="update-profile-picture" th:if="${admin}">
+        <section class="update-picture" th:if="${admin}">
             <h2>Update Profile Picture</h2>
             <form th:action="@{/uploadWorkerPicture}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="workerId" th:value="${worker.id}"/>
@@ -43,7 +43,7 @@
             </form>
         </section>
 
-        <section class="update-worker" th:if="${admin}">
+        <section class="update-section" th:if="${admin}">
             <h2>Update Worker</h2>
             <form th:action="@{/workerUpdate}" method="post">
                 <input type="hidden" name="id" th:value="${worker.id}"/>

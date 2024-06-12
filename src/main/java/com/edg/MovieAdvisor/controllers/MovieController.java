@@ -27,7 +27,7 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("/movieDetail")
-    public String workerPanel(@RequestParam("title") String title, HttpSession session, Model model) {
+    public String moviePanel(@RequestParam("title") String title, HttpSession session, Model model) {
         if (session.getAttribute("logged") == null) {
             return "redirect:/formLogin";
         }
@@ -48,7 +48,7 @@ public class MovieController {
         model.addAttribute("movie", movie);
         model.addAttribute("admin", admin);
         model.addAttribute("moviepic", moviepic);
-        return "workerDetail.html";
+        return "movieDetail.html";
     }
 
     @PostMapping("/uploadMoviePicture")

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="/css/details.css">
+    <style>
+        /* Aggiungi qui eventuali stili aggiuntivi */
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <h3><a href="/">Home</a></h3>
+            <h3 id="listLink" th:if="${admin}"><a href="/moviesList">moviesList</a></h3>
+        </div>
+    </nav>
+
+    <main>
+        <section class="user-info">
+            <div class="welcome-message">
+                <p>Movie details:</p>
+                <div class="picture">
+                    <h3>Movie Picture</h3>
+                    <img th:src="'data:image/*;base64,' + ${moviepic}" alt="Profile Picture"/>
+                </div>
+                <ul>
+                    <li th:if="${admin}"><strong>ID:</strong><span th:text="${movie.id}"></span></li>
+                    <li><strong>Title:</strong> <span th:text="${movie.title}"></span></li>
+                    <li><strong>Date:</strong> <span th:text="${movie.date}"></span></li>
+                    <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="update-picture" th:if="${admin}">
+            <h2>Update Movie Picture</h2>
+            <form th:action="@{/uploadMoviePicture}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                <input type="file" name="moviePicture" accept="image/*" required/>
+                <button type="submit">Upload Picture</button>
+            </form>
+        </section>
+
+        <section class="update-section" th:if="${admin}">
+            <h2>Update movie</h2>
+            <form th:action="@{/movieUpdate}" method="post">
+                <input type="hidden" name="id" th:value="${movie.id}"/>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" th:value="${movie.title}" required/>
+                <label for="date">Birthday:</label>
+                <input type="date" id="date" name="date" th:value="${movie.date}" required/>
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" th:value="${movie.description}" required/>
+                <label for="role">Role:</label>
+                <!-- <select id="role" name="role" required>
+                    <option value="director" th:selected="${movie.role == 'director'}">Director</option>
+                    <option value="actor" th:selected="${movie.role == 'actor'}">Actor</option>
+                </select> -->
+                <button type="submit">Update movie</button>
+            </form>
+        </section>
+        
+    </main>
+    <div class="logout">
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

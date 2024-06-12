@@ -36,12 +36,12 @@ h1, h2, h3 {
     margin-bottom: 10px;
 }
 
-.profile-picture {
+.picture {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.profile-picture img {
+.picture img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
@@ -110,24 +110,24 @@ h1, h2, h3 {
     margin-top: -35px;
 }
 
-.update-profile-picture {
+.update-picture {
     margin-top: 20px;
 }
 
-.update-profile-picture h2 {
+.update-picture h2 {
     color: #333;
     margin-bottom: 10px;
 }
 
-.update-profile-picture form {
+.update-picture form {
     margin-top: 10px;
 }
 
-.update-profile-picture form input[type="file"] {
+.update-picture form input[type="file"] {
     margin-bottom: 10px;
 }
 
-.update-profile-picture form button {
+.update-picture form button {
     padding: 10px 15px;
     background-color: #007bff;
     color: white;
@@ -136,38 +136,38 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
-.update-profile-picture form button:hover {
+.update-picture form button:hover {
     background-color: #0056b3;
 }
 
-.update-worker {
+.update-section {
     margin-top: 40px;
 }
 
-.update-worker h2 {
+.update-section h2 {
     color: #333;
     margin-bottom: 10px;
 }
 
-.update-worker form {
+.update-section form {
     margin-top: 10px;
 }
 
-.update-worker form label {
+.update-section form label {
     display: block;
     margin-bottom: 5px;
 }
 
-.update-worker form input[type="text"],
-.update-worker form input[type="date"],
-.update-worker form select {
+.update-section form input[type="text"],
+.update-section form input[type="date"],
+.update-section form select {
     width: calc(100% - 10px); /* Sottrai il margine */
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
 }
 
-.update-worker form button {
+.update-section form button {
     padding: 10px 15px;
     background-color: #007bff;
     color: white;
@@ -176,7 +176,7 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
-.update-worker form button:hover {
+.update-section form button:hover {
     background-color: #0056b3;
 }
 
