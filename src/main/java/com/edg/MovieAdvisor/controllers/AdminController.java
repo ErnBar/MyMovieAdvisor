@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.edg.MovieAdvisor.models.Movie;
+import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.models.Worker;
 import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
@@ -63,6 +64,15 @@ public class AdminController {
     
     @GetMapping("/moviesList")
     public String moviesList(Model model, HttpSession session) {
+        boolean isAdmin=true;
+        Object utente = session.getAttribute("user");
+            if (utente!=null && utente instanceof User) {
+                User u = (User) utente;
+                if (!u.getUsername().equalsIgnoreCase("admin")) {
+                    isAdmin = false;
+                }
+            }
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("movies", movieService.findAll());
         model.addAttribute("movie", new Movie());
         return "moviesList";
