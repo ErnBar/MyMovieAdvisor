@@ -2,7 +2,7 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Actors List</title>
+    <title>Directors List</title>
     <link rel="stylesheet" href="/css/actorList.css">
 </head>
 <body>
@@ -11,9 +11,9 @@
         <h3><a href="/logout">Logout</a></h3>
         <h3><a href="/usersList">UsersList</a></h3>
         <h3><a href="/moviesList">Movie List</a></h3>
-        <h3><a href="/directorsList">Directors List</a></h3>
+        <h3><a href="/actorsList">ActorsList</a></h3>
     </nav>
-    <h1>Actors List</h1>
+    <h1>Directors List</h1>
     <div>
         <table>
             <thead>
@@ -22,19 +22,19 @@
                     <th>Name</th>
                     <th>Birthday</th>
                     <th>Nationality</th>
-                    <th>DeleteActor</th>
+                    <th>DeleteDirector</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="actor : ${actors}">
-                    <td th:text="${actor.id}"></td>
-                    <td><a th:href="@{'/actorDetail?name=' + ${actor.name}}" th:text=${actor.name}></a></td>
-                    <td th:text="${actor.birthday}"></td>
-                    <td th:text="${actor.nationality}"></td>
+                <tr th:each="director : ${directors}">
+                    <td th:text="${director.id}"></td>
+                    <td><a th:href="@{'/directorDetail?name=' + ${director.name}}" th:text=${director.name}></a></td>
+                    <td th:text="${director.birthday}"></td>
+                    <td th:text="${director.nationality}"></td>
                     <td>
-                        <form th:action="@{/deleteActor}" method="post">
-                            <input type="hidden" name="actorId" th:value="${actor.id}">
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this actor?')">Delete</button>
+                        <form th:action="@{/deleteDirector}" method="post">
+                            <input type="hidden" name="directorId" th:value="${director.id}">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this director?')">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -42,7 +42,7 @@
         </table>
     </div>
     <h1>Actors Add</h1>
-    <form th:action="@{/actoradd}" th:object="${actor}" method="post">
+    <form th:action="@{/directorAdd}" th:object="${director}" method="post">
         <div>
             <label for="name">Name:</label>
             <input type="text" id="name" th:field="*{name}" required>
@@ -56,7 +56,7 @@
             <input type="text" id="nationality" th:field="*{nationality}" required>
         </div>
         <div>
-            <button type="submit">Add Actor</button>
+            <button type="submit">Add Director</button>
         </div>
     </form>
 </body>

@@ -2,7 +2,7 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Panel</title>
+    <title>Movie Detail</title>
     <link rel="stylesheet" href="/css/details.css">
     <style>
         /* Aggiungi qui eventuali stili aggiuntivi */
@@ -51,7 +51,7 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" th:value="${movie.date}" required/>
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" th:value="${movie.description}" required/>
+                <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
                 <button type="submit">Update movie</button>
             </form>
         </section>

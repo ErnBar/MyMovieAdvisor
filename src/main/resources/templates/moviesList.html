@@ -11,6 +11,7 @@
         <h3><a href="/logout">Logout</a></h3>
         <h3 th:if="${isAdmin}"><a href="/usersList">Users List</a></h3>
         <h3 th:if="${isAdmin}"><a href="/actorsList">Actors List</a></h3>
+        <h3 th:if="${isAdmin}"><a href="/directorsList">Directors List</a></h3>
     </nav>
     <h1>Movies List</h1>
     <div>
@@ -52,7 +53,7 @@
         </div>
         <div>
             <label for="description">Description:</label>
-            <textarea id="description" th:field="*{description}" required></textarea>
+            <textarea id="description" th:field="*{description}" required style="width: 380px; height: 300px;"></textarea>
         </div>
         <div>
             <button type="submit">Add Movie</button>
