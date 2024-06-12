@@ -48,12 +48,12 @@
                 <input type="hidden" name="id" th:value="${movie.id}"/>
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" th:value="${movie.title}" required/>
-                <label for="date">Birthday:</label>
+                <label for="date">Date:</label>
                 <input type="date" id="date" name="date" th:value="${movie.date}" required/>
                 <label for="description">Description:</label>
                 <input type="text" id="description" name="description" th:value="${movie.description}" required/>
-                <label for="role">Role:</label>
-                <!-- <select id="role" name="role" required>
+                <!-- <label for="role">Role:</label>
+                <select id="role" name="role" required>
                     <option value="director" th:selected="${movie.role == 'director'}">Director</option>
                     <option value="actor" th:selected="${movie.role == 'actor'}">Actor</option>
                 </select> -->
