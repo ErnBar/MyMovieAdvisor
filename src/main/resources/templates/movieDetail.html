@@ -32,8 +32,19 @@
                     <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
                 </ul>
             </div>
+            <h2>Actors</h2>
+            <div th:if="${!#lists.isEmpty(actors)}">
+                <ul>
+                    <li th:each="filmactor : ${actors}">
+                        <p><a th:href="@{'/actorDetail?name=' + ${filmactor.name}}" th:text=${filmactor.name}></a></p>
+                        <hr/>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${#lists.isEmpty(actors)}">
+                <h3>No actors found.</h3>
+            </div>
         </section>
-
         <section class="update-picture" th:if="${admin}">
             <h2>Update Movie Picture</h2>
             <form th:action="@{/uploadMoviePicture}" method="post" enctype="multipart/form-data">
@@ -65,6 +76,17 @@
                     <option th:each="director : ${directors}" th:value="${director.name}" th:text="${director.name}"></option>
                 </select>
                 <button type="submit">Associate Director</button>
+            </form>
+        </section>
+        <section class="associate-actors" th:if="${admin}">
+            <h2>Associate Actors</h2>
+            <form th:action="@{/actorsAssociation}" method="post">
+                <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                <label for="actorName">Actor:</label>
+                <select id="actorName" name="actorName" required>
+                    <option th:each="actor : ${actorsList}" th:value="${actor.name}" th:text="${actor.name}"></option>
+                </select>
+                <button type="submit">Associate Actor</button>
             </form>
         </section>
         

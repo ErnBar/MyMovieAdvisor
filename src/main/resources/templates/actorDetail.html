@@ -31,6 +31,18 @@
                     <li><strong>Nationality:</strong> <span th:text="${actor.nationality}"></span></li>
                 </ul>
             </div>
+            <h2>Movies</h2>
+            <div th:if="${!#lists.isEmpty(movies)}">
+                <ul>
+                    <li th:each="movie : ${movies}">
+                        <p><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></p>
+                        <hr/>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${#lists.isEmpty(movies)}">
+                <h3>No movies found.</h3>
+            </div>
         </section>
 
         <section class="update-picture" th:if="${admin}">

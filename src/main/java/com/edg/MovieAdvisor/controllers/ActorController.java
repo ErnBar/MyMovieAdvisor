@@ -18,6 +18,7 @@ import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.ActorService;
 
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -45,6 +46,7 @@ public class ActorController {
         if (actor.getProfilepicture() != null) {
             pfp = Base64.getEncoder().encodeToString(actor.getProfilepicture());
         }
+        model.addAttribute("movies", actor.getMovies());
         model.addAttribute("actor", actor);
         model.addAttribute("admin", admin);
         model.addAttribute("pfp", pfp);

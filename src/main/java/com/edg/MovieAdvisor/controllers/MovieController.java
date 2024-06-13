@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Director;
 import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.User;
+import com.edg.MovieAdvisor.services.ActorService;
 import com.edg.MovieAdvisor.services.DirectorService;
 import com.edg.MovieAdvisor.services.MovieService;
 
@@ -31,6 +33,9 @@ public class MovieController {
 
     @Autowired
     private DirectorService directorService;
+
+    @Autowired
+    private ActorService actorService;
 
 
 
@@ -54,11 +59,14 @@ public class MovieController {
             moviepic = Base64.getEncoder().encodeToString(movie.getMoviepicture());
         }
         List<Director> directors = directorService.findAll();
+        List<Actor> actors = actorService.findAll();
         model.addAttribute("movie", movie);
         model.addAttribute("admin", admin);
         model.addAttribute("moviepic", moviepic);
         model.addAttribute("director", movie.getDirector());
         model.addAttribute("directors", directors);
+        model.addAttribute("actors", movie.getActors());
+        model.addAttribute("actorsList", actors);
         return "movieDetail.html";
     }
 
@@ -111,6 +119,24 @@ public class MovieController {
         movieService.save(movie);
         return "redirect:/movieDetail?title=" + movie.getTitle();
 }
+    @PostMapping("/actorsAssociation")
+    public String actorsAssociation(@RequestParam("movieId") Long movieId, @RequestParam("actorName") String actorName) {
+        Movie movie = movieService.findById(movieId);
+        if (movie == null) {
+            return "redirect:/error";
+        }
+        Actor actor = actorService.findByName(actorName);
+        if (actor == null) {
+            return "redirect:/error";
+        }
+        if (!movie.getActors().contains(actor)) {
+            movie.getActors().add(actor);
+            actor.getMovies().add(movie); 
+        }
+        movieService.save(movie);
+        actorService.save(actor); 
+        return "redirect:/movieDetail?title=" + movie.getTitle();
+    }
 
 
 
