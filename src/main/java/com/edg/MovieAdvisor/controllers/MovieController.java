@@ -151,6 +151,12 @@ public class MovieController {
         return actorService.findByNameStartingWith(prefix);
     }
 
+    @GetMapping("/searchMovies")
+    @ResponseBody
+    public List<Movie> searchMovies(@RequestParam("prefix") String prefix) {
+        return movieService.findByTitleStartingWith(prefix);
+    }
+
 
 
     

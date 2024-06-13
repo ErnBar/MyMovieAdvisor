@@ -12,4 +12,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     
     @Query(value = "SELECT m.title FROM movies m LEFT JOIN reviews r ON m.id = r.movie_id GROUP BY m.id ORDER BY AVG(r.score) DESC", nativeQuery = true)
     List<Movie> findAllMoviesOrderByAverageScoreDesc();
+
+    List<Movie> findByTitleStartingWith(String prefix);
 }

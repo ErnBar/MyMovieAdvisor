@@ -41,4 +41,8 @@ public class MovieService {
             movieRepository.deleteById(id);
         }
     }
+
+    public List<Movie> findByTitleStartingWith(String prefix) {
+        return movieRepository.findByTitleStartingWith(prefix);
+    }
 }
