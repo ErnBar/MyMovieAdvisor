@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edg.MovieAdvisor.models.Actor;
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.repositories.ActorRepository;
 
 @Service
@@ -26,7 +27,13 @@ public class ActorService {
     }
 
     public void deleteById(Long id) {
-        actorRepository.deleteById(id);
+        Actor actor = findById(id);
+        if (actor != null) {
+            for (Movie movie : actor.getMovies()) {
+                movie.getActors().remove(actor);
+            }
+            actorRepository.deleteById(id);
+        }
     }
 
     public Actor findByName(String name) {

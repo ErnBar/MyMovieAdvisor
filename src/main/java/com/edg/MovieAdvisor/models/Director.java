@@ -3,6 +3,7 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,6 @@ public class Director {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] profilepicture;
 
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director",cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Movie> movies;
 }

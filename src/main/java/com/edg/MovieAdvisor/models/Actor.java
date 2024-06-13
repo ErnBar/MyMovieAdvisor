@@ -35,6 +35,6 @@ public class Actor {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] profilepicture;
 
-    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "actors", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Movie> movies;
 }

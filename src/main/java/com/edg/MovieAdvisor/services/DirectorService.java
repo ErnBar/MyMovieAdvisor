@@ -5,13 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edg.MovieAdvisor.models.Director;
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.repositories.DirectorRepository;
+import com.edg.MovieAdvisor.repositories.MovieRepository;
 
 @Service
 public class DirectorService {
 
     @Autowired
     private DirectorRepository directorRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     public List<Director> findAll() {
         return directorRepository.findAll();
@@ -26,7 +31,14 @@ public class DirectorService {
     }
 
     public void deleteById(Long id) {
-        directorRepository.deleteById(id);
+        Director director = findById(id);
+        if (director != null) {
+            for (Movie movie : director.getMovies()) {
+                movie.setDirector(null);
+                movieRepository.save(movie);
+            }
+            directorRepository.deleteById(id);
+        }
     }
 
     public Director findByName(String name) {

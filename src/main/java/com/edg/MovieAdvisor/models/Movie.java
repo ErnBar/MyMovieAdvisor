@@ -39,7 +39,7 @@ public class Movie {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] moviepicture;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
         name = "movie_actor",
         joinColumns = @JoinColumn(name = "movie_id"),
