@@ -39,4 +39,8 @@ public class ActorService {
     public Actor findByName(String name) {
         return actorRepository.findByName(name);
     }
+
+    public List<Actor> findByNameStartingWith(String prefix) {
+        return actorRepository.findByNameStartingWith(prefix);
+    }
 }

@@ -44,4 +44,8 @@ public class DirectorService {
     public Director findByName(String name) {
         return directorRepository.findByName(name);
     }
+
+    public List<Director> findByNameStartingWith(String prefix) {
+        return directorRepository.findByNameStartingWith(prefix);
+    }
 }

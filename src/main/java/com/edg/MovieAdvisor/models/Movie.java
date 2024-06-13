@@ -3,6 +3,8 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,10 +47,12 @@ public class Movie {
         joinColumns = @JoinColumn(name = "movie_id"),
         inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
+    @JsonManagedReference
     private List<Actor> actors;
 
     @ManyToOne
     @JoinColumn(name="director_id")
+    @JsonManagedReference
     private Director director;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)

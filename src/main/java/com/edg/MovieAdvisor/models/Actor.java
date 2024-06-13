@@ -3,6 +3,8 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,5 +38,6 @@ public class Actor {
     private byte[] profilepicture;
 
     @ManyToMany(mappedBy = "actors", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JsonBackReference
     private List<Movie> movies;
 }

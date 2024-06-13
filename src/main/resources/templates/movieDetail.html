@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Movie Detail</title>
     <link rel="stylesheet" href="/css/details.css">
+    <script src="js/movieDetails.js" defer></script>
     <style>
         /* Aggiungi qui eventuali stili aggiuntivi */
     </style>
@@ -68,28 +69,27 @@
             </form>
         </section>
         <section class="associate-director" th:if="${admin}">
-            <h2>Associate Director</h2>
+            <h2>Director Association</h2>
             <form th:action="@{/directorAssociation}" method="post">
                 <input type="hidden" name="movieId" th:value="${movie.id}"/>
-                <label for="directorName">Director:</label>
-                <select id="directorName" name="directorName" required>
-                    <option th:each="director : ${directors}" th:value="${director.name}" th:text="${director.name}"></option>
+                <label for="directorNameInput">Director:</label>
+                <input type="text" id="directorNameInput" name="directorName" onkeyup="searchDirectors()" autocomplete="off" required/>
+                <select id="directorList" name="directorNameSelect" size="5" style="display:none;">
                 </select>
-                <button type="submit">Associate Director</button>
+                <button type="submit">Submit</button>
             </form>
         </section>
         <section class="associate-actors" th:if="${admin}">
-            <h2>Associate Actors</h2>
+            <h2>Actors Association</h2>
             <form th:action="@{/actorsAssociation}" method="post">
                 <input type="hidden" name="movieId" th:value="${movie.id}"/>
-                <label for="actorName">Actor:</label>
-                <select id="actorName" name="actorName" required>
-                    <option th:each="actor : ${actorsList}" th:value="${actor.name}" th:text="${actor.name}"></option>
+                <label for="actorNameInput">Actor:</label>
+                <input type="text" id="actorNameInput" name="actorName" onkeyup="searchActors()" autocomplete="off" required/>
+                <select id="actorList" name="actorNameSelect" size="5" style="display:none;">
                 </select>
-                <button type="submit">Associate Actor</button>
+                <button type="submit">Submit</button>
             </form>
         </section>
-        
     </main>
     <div class="logout">
         <a href="/logout">Logout</a>

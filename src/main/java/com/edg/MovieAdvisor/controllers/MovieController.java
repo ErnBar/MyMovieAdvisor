@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edg.MovieAdvisor.models.Actor;
@@ -136,6 +137,18 @@ public class MovieController {
         movieService.save(movie);
         actorService.save(actor); 
         return "redirect:/movieDetail?title=" + movie.getTitle();
+    }
+
+    @GetMapping("/searchDirectors")
+    @ResponseBody
+    public List<Director> searchDirectors(@RequestParam("prefix") String prefix) {
+        return directorService.findByNameStartingWith(prefix);
+    }
+
+    @GetMapping("/searchActors")
+    @ResponseBody
+    public List<Actor> searchActors(@RequestParam("prefix") String prefix) {
+        return actorService.findByNameStartingWith(prefix);
     }
 
 
