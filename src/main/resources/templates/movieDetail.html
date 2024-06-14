@@ -30,6 +30,7 @@
                     <li><strong>Title:</strong> <span th:text="${movie.title}"></span></li>
                     <li><strong>Director:</strong><span th:if="${director!=null}"><a th:href="@{'/directorDetail?name=' + ${director.name}}" th:text=${director.name}></a></span></li>
                     <li><strong>Date:</strong> <span th:text="${movie.date}"></span></li>
+                    <li><strong>Average Score:</strong><span th:text="${averageScore != null ? averageScore : 'No reviews yet'}"></span> </li>
                     <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
                 </ul>
             </div>

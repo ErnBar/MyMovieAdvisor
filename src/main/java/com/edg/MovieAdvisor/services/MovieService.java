@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.repositories.MovieRepository;
+import com.edg.MovieAdvisor.repositories.ReviewRepository;
 
 @Service
 public class MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public List<Movie> findAll() {
         return movieRepository.findAll();
@@ -44,5 +48,9 @@ public class MovieService {
 
     public List<Movie> findByTitleStartingWith(String prefix) {
         return movieRepository.findByTitleStartingWith(prefix);
+    }
+
+    public Double getAverageScore(Long movieId) {
+        return reviewRepository.findAverageScoreByMovieId(movieId);
     }
 }

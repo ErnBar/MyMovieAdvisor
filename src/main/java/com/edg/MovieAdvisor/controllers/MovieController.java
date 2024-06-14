@@ -72,6 +72,7 @@ public class MovieController {
         }
         List<Director> directors = directorService.findAll();
         List<Actor> actors = actorService.findAll();
+        Double averageScore = movieService.getAverageScore(movie.getId());
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("movie", movie);
         model.addAttribute("admin", admin);
@@ -81,6 +82,7 @@ public class MovieController {
         model.addAttribute("actors", movie.getActors());
         model.addAttribute("actorsList", actors);
         model.addAttribute("movieReview", movie.getReviews());
+        model.addAttribute("averageScore", averageScore);
         return "movieDetail.html";
     }
 
