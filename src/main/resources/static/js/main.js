@@ -23,3 +23,16 @@ function searchFilm() {
         document.getElementById("search-results").innerHTML = '';
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const randomTitle = document.getElementById('random').textContent;
+    const button = document.getElementById('random-button');
+
+    button.addEventListener('click', () => {
+        if (randomTitle) {
+            window.location.href = `/movieDetail?title=${randomTitle}`;
+        } else {
+            alert('No random title available');
+        }
+    });
+});

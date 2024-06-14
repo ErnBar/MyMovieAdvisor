@@ -1,5 +1,8 @@
 package com.edg.MovieAdvisor.controllers;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
@@ -42,6 +46,10 @@ public class AppController {
                 }
                 
             }
+            List<Movie> movies = movieService.findAll();
+            Random random = new Random();
+            String randomTitle = movies.get(random.nextInt(movies.size())).getTitle();
+            model.addAttribute("randomTitle", randomTitle);
             model.addAttribute("topMovie",movieService.findAllMoviesOrderByAverageScoreDesc());
             model.addAttribute("isAdmin", isAdmin);
             model.addAttribute("actualUser", actualUser);
