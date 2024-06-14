@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edg.MovieAdvisor.models.User;
+import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,9 @@ public class AppController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MovieService movieService;
 
 
     @GetMapping("/")
@@ -38,6 +42,7 @@ public class AppController {
                 }
                 
             }
+            model.addAttribute("topMovie",movieService.findAllMoviesOrderByAverageScoreDesc());
             model.addAttribute("isAdmin", isAdmin);
             model.addAttribute("actualUser", actualUser);
             return "main.html";

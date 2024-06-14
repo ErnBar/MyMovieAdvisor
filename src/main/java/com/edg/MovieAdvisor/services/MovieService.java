@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Movie;
+import com.edg.MovieAdvisor.models.MovieDTO;
 import com.edg.MovieAdvisor.repositories.MovieRepository;
 import com.edg.MovieAdvisor.repositories.ReviewRepository;
 
@@ -52,5 +53,9 @@ public class MovieService {
 
     public Double getAverageScore(Long movieId) {
         return reviewRepository.findAverageScoreByMovieId(movieId);
+    }
+
+    public List<MovieDTO> findAllMoviesOrderByAverageScoreDesc() {
+        return movieRepository.findAllMoviesOrderByAverageScoreDesc();
     }
 }

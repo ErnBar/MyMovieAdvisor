@@ -28,6 +28,22 @@
         <h4 id="search-results">
         </h4>
     </div>
+    <div>
+    <table>
+        <tHead>
+            <tr>
+                <th>Title</th>
+                <th>Score</th>
+            </tr>
+        </tHead>
+        <tBody>
+            <tr th:each="movie : ${topMovie}">
+                <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></td>
+                <td th:text="${movie.avgScore != null ? movie.avgScore : 'No scores yet'}"></td>
+            </tr>
+        </tBody>
+    </table>
+    </div>
     <br>
 </body>
 </html>
