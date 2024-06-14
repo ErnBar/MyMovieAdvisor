@@ -39,7 +39,11 @@
                 <ul>
                     <li th:each="filmactor : ${actors}">
                         <p><a th:href="@{'/actorDetail?name=' + ${filmactor.name}}" th:text=${filmactor.name}></a></p>
-                        <hr/>
+                        <form th:if="${admin}" th:action="@{/deleteActorAssociation}" method="post" style="display: inline;">
+                            <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                            <input type="hidden" name="actorId" th:value="${filmactor.id}"/>
+                            <button type="submit">Remove</button>
+                        </form>
                     </li>
                 </ul>
             </div>

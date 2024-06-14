@@ -153,6 +153,23 @@ public class MovieController {
         actorService.save(actor); 
         return "redirect:/movieDetail?title=" + movie.getTitle();
     }
+    @PostMapping("/deleteActorAssociation")
+    public String deleteActorAssociation(@RequestParam("movieId") Long movieId, @RequestParam("actorId") Long actorId) {
+        Movie movie = movieService.findById(movieId);
+        if (movie == null) {
+            return "redirect:/error";
+        }
+        Actor actor = actorService.findById(actorId);
+        if (actor == null) {
+            return "redirect:/error";
+        }
+        if (movie.getActors().remove(actor)) {
+            actor.getMovies().remove(movie);
+            movieService.save(movie);
+            actorService.save(actor);
+        }
+        return "redirect:/movieDetail?title=" + movie.getTitle();
+    }
 
     @GetMapping("/searchDirectors")
     @ResponseBody
