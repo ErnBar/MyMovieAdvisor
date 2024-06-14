@@ -10,7 +10,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,10 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Director;
 import com.edg.MovieAdvisor.models.Movie;
+import com.edg.MovieAdvisor.models.Review;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.services.ActorService;
 import com.edg.MovieAdvisor.services.DirectorService;
 import com.edg.MovieAdvisor.services.MovieService;
+import com.edg.MovieAdvisor.services.ReviewService;
+import com.edg.MovieAdvisor.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -37,6 +42,12 @@ public class MovieController {
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private UserService userService;
 
 
 
@@ -61,6 +72,7 @@ public class MovieController {
         }
         List<Director> directors = directorService.findAll();
         List<Actor> actors = actorService.findAll();
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("movie", movie);
         model.addAttribute("admin", admin);
         model.addAttribute("moviepic", moviepic);
@@ -68,6 +80,7 @@ public class MovieController {
         model.addAttribute("directors", directors);
         model.addAttribute("actors", movie.getActors());
         model.addAttribute("actorsList", actors);
+        model.addAttribute("movieReview", movie.getReviews());
         return "movieDetail.html";
     }
 
@@ -156,6 +169,38 @@ public class MovieController {
     public List<Movie> searchMovies(@RequestParam("prefix") String prefix) {
         return movieService.findByTitleStartingWith(prefix);
     }
+
+    @PostMapping("/addReview")
+    public String addReview(@RequestParam("movieId") Long movieId,HttpSession session,@ModelAttribute("review") @Validated Review review, Model model) {
+        Movie movie = movieService.findById(movieId);
+        if (movie == null) {
+            return "redirect:/error";
+        }
+        User loggedUser = (User) session.getAttribute("user");
+        if (loggedUser == null) {
+            return "redirect:/formLogin";
+        }
+        review.setMovie(movie);
+        review.setOp(loggedUser);
+        reviewService.save(review);
+        return "redirect:/movieDetail?title=" + movie.getTitle();
+    }
+
+    @PostMapping("/deleteReview")
+    public String deleteReview(@RequestParam("reviewId") Long reviewId, HttpSession session) {
+        User loggedUser = (User) session.getAttribute("user");
+        if (loggedUser == null) {
+            return "redirect:/formLogin";
+        }
+        Review review = reviewService.findById(reviewId);
+        if (review == null || !review.getOp().getId().equals(loggedUser.getId())) {
+            return "redirect:/error";
+        }
+        Movie movie = review.getMovie();
+        reviewService.deleteById(reviewId);
+        return "redirect:/movieDetail?title=" + movie.getTitle();
+    }
+
 
 
 

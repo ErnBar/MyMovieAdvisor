@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,6 +50,7 @@ public class User {
     private byte[] profilepicture;
 
     @OneToMany(mappedBy = "op", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Review> reviews;
 
 

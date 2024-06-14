@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,10 +39,12 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="op")
+    @JsonManagedReference
     private User op;
 
     @ManyToOne
     @JoinColumn(name="movie_id")
+    @JsonManagedReference
     private Movie movie;
     
 }

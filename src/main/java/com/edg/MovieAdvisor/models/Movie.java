@@ -3,6 +3,7 @@ package com.edg.MovieAdvisor.models;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -56,5 +57,6 @@ public class Movie {
     private Director director;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Review> reviews;
 }
