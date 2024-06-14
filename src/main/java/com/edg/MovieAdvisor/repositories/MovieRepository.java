@@ -6,15 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.edg.MovieAdvisor.models.Movie;
-import com.edg.MovieAdvisor.models.MovieDTO;
+import com.edg.MovieAdvisor.projection.MovieProjection;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     Movie findByTitle(String title);
     
-    @Query("SELECT new com.edg.MovieAdvisor.models.MovieDTO(m.title, AVG(r.score)) " +
-           "FROM Movie m LEFT JOIN m.reviews r GROUP BY m.id " +
-           "ORDER BY AVG(r.score) DESC")
-    List<MovieDTO> findAllMoviesOrderByAverageScoreDesc();
+    @Query(value = "SELECT m.title AS title, AVG(r.score) AS score FROM movies m LEFT JOIN reviews r ON m.id = r.movie_id GROUP BY m.id ORDER BY AVG(r.score) DESC limit 10", nativeQuery = true)
+    List<MovieProjection> findAllMoviesOrderByAverageScoreDesc();
 
     List<Movie> findByTitleStartingWith(String prefix);
 }
