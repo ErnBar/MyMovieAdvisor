@@ -59,4 +59,8 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Review> reviews;
+
+    @ManyToMany(mappedBy = "favoriteMovies", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JsonBackReference
+    private List<User> favoriteUserMovies;
 }

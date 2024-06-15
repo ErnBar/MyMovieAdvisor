@@ -34,6 +34,14 @@
                     <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
                 </ul>
             </div>
+            <section>
+                <h2>Add to Favorites</h2>
+                <form th:action="@{/favoriteAssociation}" method="post">
+                    <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                    <input type="hidden" name="userId" th:value="${loggedUser.id}"/>
+                    <button type="submit">Add to Favorites</button>
+                </form>
+            </section>
             <h2>Actors</h2>
             <div th:if="${!#lists.isEmpty(actors)}">
                 <ul>
