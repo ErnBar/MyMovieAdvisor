@@ -44,10 +44,10 @@
                 </tbody>
             </table>
         </div>
-        <div th:if="${randomTitle != null}">
-            <p id="random" th:text="${randomTitle}" hidden></p>
-            <button id="random-button">Random Movie</button>
-        </div>
     </main>
+    <div th:if="${randomTitle != null}">
+        <p id="random" th:text="${randomTitle}" hidden></p>
+        <button id="random-button">Random Movie</button>
+    </div>
 </body>
 </html>

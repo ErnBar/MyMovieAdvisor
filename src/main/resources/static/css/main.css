@@ -10,6 +10,10 @@ header {
     color: #fff;
     padding: 10px 0;
 }
+#random-button{
+   margin-left: 80%;
+   
+}
 
 nav {
     display: flex;
