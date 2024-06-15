@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.repositories.UserRepository;
 
@@ -28,7 +29,13 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-        userRepository.deleteById(id);
+        User user=findById(id);
+        if (user != null) {
+            for(Movie movie : user.getFavoriteMovies()){
+                movie.getFavoriteUserMovies().remove(user);
+            }
+             userRepository.deleteById(id);
+        }
     }
 
     public User findByUsernameAndPassword(String username, String password) {

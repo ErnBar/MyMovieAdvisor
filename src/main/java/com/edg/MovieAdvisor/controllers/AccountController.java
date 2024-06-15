@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.edg.MovieAdvisor.models.Movie;
 import com.edg.MovieAdvisor.models.User;
+import com.edg.MovieAdvisor.services.MovieService;
 import com.edg.MovieAdvisor.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,6 +24,9 @@ public class AccountController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/register")
     public String registrationForm(Model model) {
@@ -99,6 +103,24 @@ public class AccountController {
         session.removeAttribute("user");
         session.removeAttribute("logged");
         return "formLogin.html";
+    }
+
+    @PostMapping("/deleteFavouriteAssociation")
+    public String deleteActorAssociation(@RequestParam("movieId") Long movieId, @RequestParam("userId") Long userId) {
+        Movie movie = movieService.findById(movieId);
+        if (movie == null) {
+            return "redirect:/error";
+        }
+        User user = userService.findById(userId);
+        if (user == null) {
+            return "redirect:/error";
+        }
+        if (movie.getFavoriteUserMovies().remove(user)) {
+            user.getFavoriteMovies().remove(movie);
+            movieService.save(movie);
+            userService.save(user);
+        }
+        return "redirect:/userPanel?displayname="+user.getDisplayname();
     }
 
     // @PostMapping("/uploadProfilePicture")

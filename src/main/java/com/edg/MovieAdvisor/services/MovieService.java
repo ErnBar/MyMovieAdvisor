@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Movie;
+import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.projection.MovieProjection;
 import com.edg.MovieAdvisor.repositories.MovieRepository;
 import com.edg.MovieAdvisor.repositories.ReviewRepository;
@@ -41,6 +42,9 @@ public class MovieService {
         if (movie != null) {
             for (Actor actor : movie.getActors()) {
                 actor.getMovies().remove(movie);
+            }
+            for(User user : movie.getFavoriteUserMovies()){
+                user.getFavoriteMovies().remove(movie);
             }
             movie.setDirector(null);
             movieRepository.deleteById(id);
