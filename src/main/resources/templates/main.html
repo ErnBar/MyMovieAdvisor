@@ -1,53 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
-            <div class="links">
+            <div class="nav-left">
                 <div class="movies-panel">
-                    <h3><a href="/moviesList">Movie List</a></h3>
+                    <h3><a id="movieslist" href="/moviesList">Movie List</a></h3>
                 </div>
-                <div class="user-panel">
-                    <h3><a th:href="@{'/userPanel?displayname=' + ${actualUser}}" th:text="${actualUser}"></a></h3>
-                    <h3 th:if="${isAdmin}"><a href="/usersList">AdminPanel</a></h3>
-                    <a href="/logout">Logout</a>
+                <div class="form-cerca">
+                    <input type="text" id="search-film" name="title" placeholder="Search Movie" onkeyup="searchFilm()">
+                    <ul id="search-results"></ul>
                 </div>
+            </div>
+            <div class="user-panel">
+                <h3><a th:href="@{'/userPanel?displayname=' + ${actualUser}}" th:text="${actualUser}"></a></h3>
+                <h3 th:if="${isAdmin}"><a href="/usersList">AdminPanel</a></h3>
+                <a href="/logout">Logout</a>
             </div>
         </nav>    
     </header>
-    <div class="form-cerca">
-        <p>
-            <input type="text" id="search-film" name="title" placeholder="Search Movie" onkeyup="searchFilm()">
-        </p>
-        <h4 id="search-results">
-        </h4>
-    </div>
-    <div th:if="${topMovie != null}">
-    <table>
-        <tHead>
-            <tr>
-                <th>Title</th>
-                <th>Score</th>
-            </tr>
-        </tHead>
-        <tBody>
-            <tr th:each="movie : ${topMovie}">
-                <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></td>
-                <td th:text="${movie.score != null ? movie.score : 'No scores yet'}"></td>
-            </tr>
-        </tBody>
-    </table>
-    </div>
-    <div th:if="${randomTitle != null}">
-        <p id="random" th:text="${randomTitle}" hidden></p>
-        <button id="random-button">Random Movie</button>
-    </div>
-    <br>
+    <main>
+        <div class="top-movies" th:if="${topMovie != null}">
+            <h3>TOP 10</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="movie : ${topMovie}">
+                        <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text="${movie.title}"></a></td>
+                        <td th:text="${movie.score != null ? movie.score : 'No scores yet'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${randomTitle != null}">
+            <p id="random" th:text="${randomTitle}" hidden></p>
+            <button id="random-button">Random Movie</button>
+        </div>
+    </main>
 </body>
 </html>

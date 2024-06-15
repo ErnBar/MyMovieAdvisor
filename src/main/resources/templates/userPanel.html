@@ -7,33 +7,28 @@
 </head>
 <body>
     <nav>
-        <div>
+        <div class="nav-left">
             <h3><a href="/">Home</a></h3>
-            <h3 id="listLink" th:if="${admin}"><a href="/usersList">UsersList</a></h3>
+            <h3 id="listLink" th:if="${admin}"><a href="/usersList">Users List</a></h3>
         </div>
-        
+        <div class="nav-right">
+            <a href="/logout">Logout</a>
+        </div>
     </nav>
     <main>
         <section class="user-info">
-            <h1>User Panel</h1>
             <div class="welcome-message">
                 <h2 th:if="${userlog}">Welcome, <span th:text="${user.displayname}"></span>!</h2>
-                <p>User details:</p>
                 <ul>
                     <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
                     <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
                     <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
-                    <li><strong>RegistrationDate:</strong><span th:text="${#dates.format(user.registrationdate, 'dd/MM/yyyy')}"></span></li>
+                    <li><strong>Registration Date:</strong> <span th:text="${#dates.format(user.registrationdate, 'dd/MM/yyyy')}"></span></li>
                 </ul>
             </div>
             <div class="profile-picture">
-                <h3>Profile Picture</h3>
                 <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
             </div>
-            <!--<div>
-                <h3>Profile Picture</h3>
-                <img th:src="@{'/user-photos/' + ${user.id} + '/profile.jpg'}" alt="Profile Picture" width="150" height="150"/>
-            </div> metodo senza base64-->
         </section>
         
         <section class="reviews">
@@ -41,7 +36,7 @@
             <div th:if="${!#lists.isEmpty(favorite)}">
                 <ul>
                     <li th:each="favoritemovies : ${favorite}">
-                        <a th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text=${favoritemovies.title}></a>
+                        <a th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text="${favoritemovies.title}"></a>
                         <form th:if="${userlog}" th:action="@{/deleteFavouriteAssociation}" method="post" style="display: inline;">
                             <input type="hidden" name="movieId" th:value="${favoritemovies.id}"/>
                             <input type="hidden" name="userId" th:value="${user.id}"/>
@@ -58,7 +53,9 @@
 
         <section class="account-actions" th:if="${userlog}">
             <h2>Update Account</h2>
-            <form th:action="@{/updateAccount}" th:object="${user}" method="post">
+            <button type="button" onclick="showForm('updateAccountForm')">Show Update Form</button>
+            <button type="button" onclick="hideForm('updateAccountForm')">Hide Update Form</button>
+            <form id="updateAccountForm" th:action="@{/updateAccount}" th:object="${user}" method="post" style="display:none;">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" th:field="*{username}">
@@ -81,7 +78,9 @@
             </form>
 
             <h2>Upload Profile Picture</h2>
-            <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
+            <button type="button" onclick="showForm('uploadProfilePictureForm')">Show Upload Form</button>
+            <button type="button" onclick="hideForm('uploadProfilePictureForm')">Hide Upload Form</button>
+            <form id="uploadProfilePictureForm" th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data" style="display:none;">
                 <div class="form-group">
                     <label for="profilePicture">Choose a profile picture (JPG):</label>
                     <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
@@ -90,16 +89,20 @@
                     <button type="submit">Upload Picture</button>
                 </div>
             </form>
-
-            <h2>Delete Account</h2>
-            <form th:action="@{/deleteAccount}" method="post">
+            <br><br><br>
+            <form id="deleteAccountForm" th:action="@{/deleteAccount}" method="post">
                 <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
             </form>
         </section>
-        
-        <div class="logout">
-            <a href="/logout">Logout</a>
-        </div>
     </main>
+    <script>
+        function showForm(formId) {
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function hideForm(formId) {
+            document.getElementById(formId).style.display = 'none';
+        }
+    </script>
 </body>
 </html>

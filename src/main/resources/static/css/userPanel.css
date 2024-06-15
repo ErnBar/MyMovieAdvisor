@@ -1,26 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
 
 nav {
     background-color: #333;
-    padding: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-nav h3 a {
-    color: white;
+.nav-left h3 {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a:hover {
     text-decoration: none;
 }
 
 main {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info, .reviews, .account-actions {
+    margin-bottom: 40px;
 }
 
 h1, h2, h3 {
@@ -32,20 +49,10 @@ h1, h2, h3 {
     padding: 0;
 }
 
-.welcome-message ul li {
-    margin-bottom: 10px;
-}
-
-.profile-picture {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .profile-picture img {
+    max-width: 150px;
+    height: auto;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
 }
 
 .reviews ul {
@@ -53,59 +60,56 @@ h1, h2, h3 {
     padding: 0;
 }
 
-.reviews ul li {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+.reviews li {
+    margin-bottom: 10px;
 }
 
-.account-actions {
-    margin-top: 20px;
-}
-
-.account-actions .form-group {
-    margin-bottom: 15px;
-}
-
-.account-actions .form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.account-actions .form-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-.account-actions .form-group button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.account-actions .form-group button:hover {
-    background-color: #0056b3;
-}
-
-.logout {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.logout a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.logout a:hover {
+.reviews li a {
+    color: #333;
     text-decoration: underline;
 }
 
-#listLink{
-    margin-left: 93%;
-    margin-top: -35px;
+.reviews button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.reviews button:hover {
+    background-color: #555;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-group button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.form-group button:hover {
+    background-color: #555;
 }
