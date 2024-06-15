@@ -68,7 +68,7 @@ public class AccountController {
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
         model.addAttribute("pfp", pfp);
-        model.addAttribute("reviews", user.getReviews());
+        model.addAttribute("favorite", user.getFavoriteMovies());
         return "userPanel.html";
     }
 

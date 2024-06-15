@@ -37,20 +37,17 @@
         </section>
         
         <section class="reviews">
-            <h2>Your Reviews</h2>
-            <div th:if="${!#lists.isEmpty(reviews)}">
+            <h2>Favorite Movies</h2>
+            <div th:if="${!#lists.isEmpty(favorite)}">
                 <ul>
-                    <li th:each="review : ${reviews}">
-                        <p>Review Date: <span th:text="${#dates.format(review.review_date, 'dd/MM/yyyy')}"></span></p>
-                        <p>Score: <span th:text="${review.score}"></span></p>
-                        <p>Text: <span th:text="${review.text}"></span></p>
-                        <p>Movie: <span th:text="${review.movie.title}"></span></p>
+                    <li th:each="favoritemovies : ${favorite}">
+                        <a th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text=${favoritemovies.title}></a>
                         <hr/>
                     </li>
                 </ul>
             </div>
-            <div th:if="${#lists.isEmpty(reviews)}">
-                <h3>No reviews found.</h3>
+            <div th:if="${#lists.isEmpty(favorite)}">
+                <h3>No favorite movies found.</h3>
             </div>
         </section>
 
