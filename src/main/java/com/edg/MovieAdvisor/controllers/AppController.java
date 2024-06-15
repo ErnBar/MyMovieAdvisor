@@ -47,10 +47,12 @@ public class AppController {
                 
             }
             List<Movie> movies = movieService.findAll();
-            Random random = new Random();
-            String randomTitle = movies.get(random.nextInt(movies.size())).getTitle();
-            model.addAttribute("randomTitle", randomTitle);
-            model.addAttribute("topMovie",movieService.findAllMoviesOrderByAverageScoreDesc());
+            if (movies != null && !movies.isEmpty()) {
+                Random random = new Random();
+                String randomTitle = movies.get(random.nextInt(movies.size())).getTitle();
+                model.addAttribute("randomTitle", randomTitle);
+                model.addAttribute("topMovie", movieService.findAllMoviesOrderByAverageScoreDesc());
+            }
             model.addAttribute("isAdmin", isAdmin);
             model.addAttribute("actualUser", actualUser);
             return "main.html";

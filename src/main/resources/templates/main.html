@@ -28,7 +28,7 @@
         <h4 id="search-results">
         </h4>
     </div>
-    <div>
+    <div th:if="${topMovie != null}">
     <table>
         <tHead>
             <tr>
@@ -44,7 +44,7 @@
         </tBody>
     </table>
     </div>
-    <div>
+    <div th:if="${randomTitle != null}">
         <p id="random" th:text="${randomTitle}" hidden></p>
         <button id="random-button">Random Movie</button>
     </div>
