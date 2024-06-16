@@ -1,146 +1,142 @@
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 nav {
     background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
 }
 
-nav h3 {
-    margin: 0;
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
 }
 
-nav a {
-    color: #fff;
+.nav-left h3,
+.nav-right a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-left h3 a,
+.nav-right a {
+    color: white;
     text-decoration: none;
     padding: 10px;
     transition: background-color 0.3s;
 }
 
-nav a:hover {
+.nav-left h3 a:hover,
+.nav-right a:hover {
     background-color: #555;
 }
 
 main {
-    max-width: 1200px;
-    margin: 40px auto;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
     padding: 20px;
-    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
 }
 
 h2 {
     color: #333;
-    text-align: center;
-    margin-bottom: 40px;
 }
 
-.user-info, .reviews, .account-actions {
-    margin-bottom: 40px;
+.welcome-message ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.welcome-message li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.profile-picture {
+    text-align: center;
 }
 
 .profile-picture img {
-    width: 150px;
-    height: 150px;
     border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto;
+    max-width: 150px;
 }
 
-form {
-    margin-top: 20px;
+.reviews ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-form div.form-group {
+.reviews li {
     margin-bottom: 10px;
 }
 
-form label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+.reviews hr {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin: 10px 0;
 }
 
-form input, form textarea {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+form {
+    margin-bottom: 20px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: #fff;
+button,
+input[type="submit"] {
+    background-color: #333;
+    color: white;
     border: none;
     padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-    display: inline-block;
+    cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
+button:hover,
+input[type="submit"]:hover {
+    background-color: #555;
 }
 
-.toggle-btn {
-    background-color: #007BFF;
+button[type="button"] {
+    background-color:black;
 }
 
-.toggle-btn:hover {
-    background-color: #0056b3;
+button[type="button"]:hover {
+    background-color:#555;
 }
 
-.hide-btn {
-    background-color: #f44336;
+#deleteAccountForm button {
+    background-color: black;
+    margin-top: 20px; /* Aggiunto spazio sopra il bottone di delete */
 }
 
-.hide-btn:hover {
-    background-color: #da190b;
+#deleteAccountForm button:hover {
+    background-color: #555;
 }
 
-.remove-btn {
-    background-color: #000;
-    color: #fff;
+form .form-group {
+    margin-bottom: 15px;
 }
 
-.remove-btn:hover {
-    background-color: #333;
+form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
 }
 
-.update-btn {
-    background-color: #000;
-    color: #fff;
-}
-
-.update-btn:hover {
-    background-color: #333;
-}
-
-.upload-btn {
-    background-color: #4CAF50;
-}
-
-.upload-btn:hover {
-    background-color: #45a049;
-}
-
-.delete-account-btn {
-    background-color: #000;
-    color: #fff;
-}
-
-.delete-account-btn:hover {
-    background-color: #333;
+form .form-group input,
+form .form-group textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
