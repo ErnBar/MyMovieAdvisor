@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Movies List</title>
-    <link rel="stylesheet" href="/css/actorList.css">
+    <link rel="stylesheet" href="/css/moviesList.css">
 </head>
 <body>
     <nav>
@@ -13,51 +13,67 @@
         <h3 th:if="${isAdmin}"><a href="/directorsList">Directors List</a></h3>
         <h3><a href="/logout">Logout</a></h3>
     </nav>
-    <h1>Movies List</h1>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th th:if="${isAdmin}">ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th th:if="${isAdmin}">DeleteMovie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="movie : ${movies}">
-                    <td th:if="${isAdmin}" th:text="${movie.id}"></td>
-                    <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text=${movie.title}></a></td>
-                    <td th:text="${movie.description}"></td>
-                    <td th:text="${movie.date}"></td>
-                    <td th:if="${isAdmin}">
-                        <form th:action="@{/deleteMovie}" method="post">
-                            <input type="hidden" name="movieId" th:value="${movie.id}">
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <h1 th:if="${isAdmin}">Movie Add</h1>
-    <form th:action="@{/movieAdd}" th:object="${movie}" method="post" th:if="${isAdmin}">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" th:field="*{title}" required>
+    <main>
+        <h1>Movies List</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th th:if="${isAdmin}">ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th th:if="${isAdmin}">Delete Movie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="movie : ${movies}">
+                        <td th:if="${isAdmin}" th:text="${movie.id}"></td>
+                        <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text="${movie.title}"></a></td>
+                        <td th:text="${movie.description}"></td>
+                        <td th:text="${movie.date}"></td>
+                        <td th:if="${isAdmin}">
+                            <form th:action="@{/deleteMovie}" method="post">
+                                <input type="hidden" name="movieId" th:value="${movie.id}">
+                                <button id="delete-movies" type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div>
-            <label for="date">Date:</label>
-            <input type="date" id="date" th:field="*{date}" required>
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" th:field="*{description}" required style="width: 380px; height: 300px;"></textarea>
-        </div>
-        <div>
-            <button type="submit">Add Movie</button>
-        </div>
-    </form>
+        <button id="show-form-btn" th:if="${isAdmin}" onclick="toggleFormVisibility()">Show Add Movie Form</button>
+        <form id="movie-form" th:action="@{/movieAdd}" th:object="${movie}" method="post" th:if="${isAdmin}" style="display: none;">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" th:field="*{title}" required>
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" th:field="*{date}" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" th:field="*{description}" required style="width: 380px; height: 300px;"></textarea>
+            </div>
+            <div>
+                <button type="submit">Add Movie</button>
+                <button type="button" onclick="toggleFormVisibility()">Hide Form</button>
+            </div>
+        </form>
+    </main>
+    <script>
+        function toggleFormVisibility() {
+            const form = document.getElementById('movie-form');
+            const showFormBtn = document.getElementById('show-form-btn');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                showFormBtn.style.display = 'none';
+            } else {
+                form.style.display = 'none';
+                showFormBtn.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>

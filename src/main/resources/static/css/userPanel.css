@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -14,102 +14,133 @@ nav {
     align-items: center;
 }
 
-.nav-left h3 {
-    display: inline;
-    margin-right: 20px;
+nav h3 {
+    margin: 0;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
 }
 
 nav a:hover {
-    text-decoration: none;
+    background-color: #555;
 }
 
 main {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .user-info, .reviews, .account-actions {
     margin-bottom: 40px;
 }
 
-h1, h2, h3 {
-    color: #333;
-}
-
-.welcome-message ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 .profile-picture img {
-    max-width: 150px;
-    height: auto;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
 
-.reviews ul {
-    list-style-type: none;
-    padding: 0;
+form {
+    margin-top: 20px;
 }
 
-.reviews li {
+form div.form-group {
     margin-bottom: 10px;
 }
 
-.reviews li a {
-    color: #333;
-    text-decoration: underline;
-}
-
-.reviews button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 14px;
-}
-
-.reviews button:hover {
-    background-color: #555;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+form label {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.form-group input {
+form input, form textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
-.form-group button {
-    background-color: #333;
+button {
+    background-color: #4CAF50;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    display: inline-block;
 }
 
-.form-group button:hover {
-    background-color: #555;
+button:hover {
+    background-color: #45a049;
+}
+
+.toggle-btn {
+    background-color: #007BFF;
+}
+
+.toggle-btn:hover {
+    background-color: #0056b3;
+}
+
+.hide-btn {
+    background-color: #f44336;
+}
+
+.hide-btn:hover {
+    background-color: #da190b;
+}
+
+.remove-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.remove-btn:hover {
+    background-color: #333;
+}
+
+.update-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.update-btn:hover {
+    background-color: #333;
+}
+
+.upload-btn {
+    background-color: #4CAF50;
+}
+
+.upload-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-account-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.delete-account-btn:hover {
+    background-color: #333;
 }

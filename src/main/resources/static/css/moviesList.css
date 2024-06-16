@@ -90,6 +90,14 @@ button:hover {
     background-color: #45a049;
 }
 
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+}
+
 form {
     margin-top: 20px;
 }
@@ -104,7 +112,7 @@ form label {
     margin-bottom: 5px;
 }
 
-form input {
+form input, form textarea {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
@@ -113,9 +121,6 @@ form input {
 form button[type="submit"] {
     background-color: #4CAF50;
 }
-#deletesubmit{
-    background-color: #da190b;
-}
 
 form button[type="button"] {
     background-color: #f44336;
@@ -123,5 +128,8 @@ form button[type="button"] {
 }
 
 form button[type="button"]:hover {
+    background-color: #da190b;
+}
+#delete-movies{
     background-color: #da190b;
 }
