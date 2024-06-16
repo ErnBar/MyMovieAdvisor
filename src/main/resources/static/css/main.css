@@ -23,6 +23,15 @@ nav {
     margin: 0 auto;
     padding: 0 20px;
 }
+nav a:hover {
+    background-color: #555;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
 
 .nav-left {
     display: flex;
