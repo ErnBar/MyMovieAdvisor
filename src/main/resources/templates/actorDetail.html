@@ -54,7 +54,7 @@
             </div>
         </section>
 
-        <button id="toggleUpdatePicture" class="toggle-button" onclick="toggleSection('updatePictureSection', 'toggleUpdatePicture')">Show Update Picture<i class="fas fa-chevron-down"></i></button>
+        <button th:if="${admin}" id="toggleUpdatePicture" class="toggle-button" onclick="toggleSection('updatePictureSection', 'toggleUpdatePicture')">Show Update Picture<i class="fas fa-chevron-down"></i></button>
         <section id="updatePictureSection" class="update-picture" th:if="${admin}" style="display:none;">
             <h2>Update Profile Picture</h2>
             <form th:action="@{/uploadActorPicture}" method="post" enctype="multipart/form-data">
@@ -65,7 +65,7 @@
             </form>
         </section>
 
-        <button id="toggleUpdateSection" class="toggle-button" onclick="toggleSection('updateSection', 'toggleUpdateSection')">Show Update Info<i class="fas fa-chevron-down"></i></button>
+        <button th:if="${admin}" id="toggleUpdateSection" class="toggle-button" onclick="toggleSection('updateSection', 'toggleUpdateSection')">Show Update Info<i class="fas fa-chevron-down"></i></button>
         <section id="updateSection" class="update-section" th:if="${admin}" style="display:none;">
             <h2>Update Actor</h2>
             <form th:action="@{/actorUpdate}" method="post">
