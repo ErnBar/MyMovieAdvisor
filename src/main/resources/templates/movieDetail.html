@@ -109,7 +109,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
                 <label for="trailer">Trailer:</label>
-                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}"/>
+                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}" placeholder="URL EMBED EXAMPLE: https://www.youtube.com/embed/2BisWylMzxI"/>
                 <button type="submit">Update movie</button>
             </form>
         </section>
