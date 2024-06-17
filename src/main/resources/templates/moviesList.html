@@ -56,6 +56,10 @@
                 <textarea id="description" th:field="*{description}" required style="width: 380px; height: 300px;"></textarea>
             </div>
             <div>
+                <label for="trailer">Trailer URL</label>
+                <input type="text" id="trailer" th:field="*{trailer}" required placeholder="URL EMBED EXAMPLE: https://www.youtube.com/embed/2BisWylMzxI">
+            </div>
+            <div>
                 <button type="submit">Add Movie</button>
                 <button type="button" onclick="toggleFormVisibility()">Hide Form</button>
             </div>
