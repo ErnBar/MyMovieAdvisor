@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Actor Detail</title>
-    <link rel="stylesheet" href="/css/details.css" type="text/css">
+    <link rel="stylesheet" href="/css/actordetails.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQd5pzyOFsu4aqmLhM+5JQz6hZT3bQ5z6/8zj4/yXLc1KHmj3gW1HDZMg+ieHl76WvsYQp83CTkGR8G+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        function toggleSection(sectionId, buttonId) {
+            const section = document.getElementById(sectionId);
+            const button = document.getElementById(buttonId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+                button.innerHTML = 'Hide <i class="fas fa-chevron-up"></i>';
+            } else {
+                section.style.display = "none";
+                button.innerHTML = 'Show <i class="fas fa-chevron-down"></i>';
+            }
+        }
+    </script>
 </head>
 <body>
     <nav>
         <div>
-            <h3><a href="/">Home</a></h3>
+            <h3 ><a id="Home" href="/">Home</a></h3>
             <h3 id="listLink" th:if="${admin}"><a href="/actorsList">ActorsList</a></h3>
         </div>
     </nav>
@@ -16,9 +30,7 @@
     <main>
         <section class="user-info">
             <div class="welcome-message">
-                <p>Actor details:</p>
                 <div class="picture">
-                    <h3>Actor Picture</h3>
                     <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
                 </div>
                 <ul>
@@ -42,16 +54,19 @@
             </div>
         </section>
 
-        <section class="update-picture" th:if="${admin}">
+        <button id="toggleUpdatePicture" class="toggle-button" onclick="toggleSection('updatePictureSection', 'toggleUpdatePicture')">Show Update Picture<i class="fas fa-chevron-down"></i></button>
+        <section id="updatePictureSection" class="update-picture" th:if="${admin}" style="display:none;">
             <h2>Update Profile Picture</h2>
             <form th:action="@{/uploadActorPicture}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="actorId" th:value="${actor.id}"/>
                 <input type="file" name="profilePicture" accept="image/*" required/>
                 <button type="submit">Upload Picture</button>
+                <button type="button" class="hide-button" onclick="toggleSection('updatePictureSection', 'toggleUpdatePicture')">Hide <i class="fas fa-chevron-up"></i></button>
             </form>
         </section>
 
-        <section class="update-section" th:if="${admin}">
+        <button id="toggleUpdateSection" class="toggle-button" onclick="toggleSection('updateSection', 'toggleUpdateSection')">Show Update Info<i class="fas fa-chevron-down"></i></button>
+        <section id="updateSection" class="update-section" th:if="${admin}" style="display:none;">
             <h2>Update Actor</h2>
             <form th:action="@{/actorUpdate}" method="post">
                 <input type="hidden" name="id" th:value="${actor.id}"/>
@@ -62,9 +77,9 @@
                 <label for="nationality">Nationality:</label>
                 <input type="text" id="nationality" name="nationality" th:value="${actor.nationality}" required/>
                 <button type="submit">Update Actor</button>
+                <button type="button" class="hide-button" onclick="toggleSection('updateSection', 'toggleUpdateSection')">Hide <i class="fas fa-chevron-up"></i></button>
             </form>
         </section>
-        
     </main>
     <div class="logout">
         <a href="/logout">Logout</a>

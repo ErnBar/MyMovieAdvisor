@@ -1,0 +1,171 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav h3 a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.welcome-message ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.welcome-message ul li {
+    margin-bottom: 10px;
+}
+
+.picture {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.picture img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.reviews ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reviews ul li {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.account-actions {
+    margin-top: 20px;
+}
+
+.account-actions .form-group {
+    margin-bottom: 15px;
+}
+
+.account-actions .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.account-actions .form-group input {
+    width: calc(100% - 30px);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.account-actions .form-group button {
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-actions .form-group button:hover {
+    background-color:#333;
+}
+
+.logout {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}
+
+#listLink {
+    float: right;
+    margin-top: -2.5%;
+}
+
+.update-picture, .update-section {
+    margin-top: 20px;
+}
+
+.update-picture h2, .update-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.update-picture form, .update-section form {
+    margin-top: 10px;
+}
+
+.update-picture form input[type="file"], .update-section form input[type="text"], .update-section form input[type="date"], .update-section form select {
+    width: calc(100% - 10px);
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.update-picture form button, .update-section form button {
+    padding: 10px 15px;
+    background-color:black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-picture form button:hover, .update-section form button:hover {
+    background-color: #333;
+}
+
+.toggle-button, .hide-button {
+    padding: 10px 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.toggle-button:hover, .hide-button:hover {
+    background-color: #333;
+}
+
+.toggle-button i, .hide-button i {
+    margin-left: 5px;
+}
