@@ -107,7 +107,8 @@ public class MovieController {
 
     @PostMapping("/movieUpdate")
     public String updateMovie(@RequestParam("id") Long id, @RequestParam("title") String title,
-                            @RequestParam("date") String date, @RequestParam("description") String description) {
+                            @RequestParam("date") String date, @RequestParam("description") String description,
+                            @RequestParam("trailer")String trailer) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         Date realDate = Date.valueOf(localDate);
@@ -116,6 +117,7 @@ public class MovieController {
             movie.setTitle(title);
             movie.setDate(realDate); 
             movie.setDescription(description);
+            movie.setTrailer(trailer);
             movieService.save(movie);
         }
         return "redirect:/movieDetail?title=" + title;

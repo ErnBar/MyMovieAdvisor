@@ -38,6 +38,9 @@ public class Movie {
     @Column(nullable = false)
     private Date date;
 
+    @Column(columnDefinition = "TEXT")
+    private String trailer;
+
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] moviepicture;

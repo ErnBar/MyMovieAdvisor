@@ -32,6 +32,15 @@
                     <li><strong>Date:</strong> <span th:text="${movie.date}"></span></li>
                     <li><strong>Average Score:</strong><span th:text="${averageScore != null ? averageScore : 'No reviews yet'}"></span> </li>
                     <li><strong>Description:</strong> <span th:text="${movie.description}"></span></li>
+                    <li>
+                        <strong>Trailer:</strong>
+                        <div th:if="${not #strings.isEmpty(movie.trailer)}">
+                            <iframe width="320" height="240" th:src="${movie.trailer}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div th:unless="${not #strings.isEmpty(movie.trailer)}">
+                            <p>No trailer found.</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <section>
@@ -99,6 +108,8 @@
                 <input type="date" id="date" name="date" th:value="${movie.date}" required/>
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
+                <label for="trailer">Trailer:</label>
+                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}"/>
                 <button type="submit">Update movie</button>
             </form>
         </section>
