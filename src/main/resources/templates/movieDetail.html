@@ -35,7 +35,7 @@
                     <li>
                         <strong>Trailer:</strong>
                         <div th:if="${not #strings.isEmpty(movie.trailer)}">
-                            <iframe width="320" height="240" th:src="${movie.trailer}" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="320" height="240" th:src="@{|${#strings.replace(movie.trailer, 'watch?v=', 'embed/')}|}" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div th:unless="${not #strings.isEmpty(movie.trailer)}">
                             <p>No trailer found.</p>
@@ -109,7 +109,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
                 <label for="trailer">Trailer:</label>
-                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}" placeholder="URL EMBED EXAMPLE: https://www.youtube.com/embed/2BisWylMzxI"/>
+                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}" placeholder="YOUTUBE URL"/>
                 <button type="submit">Update movie</button>
             </form>
         </section>
