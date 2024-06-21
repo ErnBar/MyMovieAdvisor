@@ -4,94 +4,116 @@
     <meta charset="UTF-8">
     <title>User Panel</title>
     <link rel="stylesheet" href="/css/userPanel.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-    <nav>
-        <div class="nav-left">
-            <h3><a href="/">Home</a></h3>
-            <h3 id="listLink" th:if="${admin}"><a href="/usersList">Users List</a></h3>
-        </div>
-        <div class="nav-right">
-            <a href="/logout">Logout</a>
-        </div>
-    </nav>
+<body id="Body">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" >
+    <div class="container-fluid">
+      <b class="navbar-brand" style="color:#0db1fdce ;"> MyMovieAdvisor.</b>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/">Home</a>
+          </li>
+          <li th:if="${admin}" class="nav-item">
+            <a class="nav-link " aria-current="page" href="/usersList">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <main>
         <section class="user-info">
             <div class="welcome-message">
-                <h2 th:if="${userlog}">Welcome, <span th:text="${user.displayname}"></span>!</h2>
+                <b><h2 class="display-6" th:if="${userlog}">Welcome, <span class="display-6" th:text="${user.displayname}"></span>!</h2></b>
                 <ul>
-                    <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
-                    <li><strong>Display Name:</strong> <span th:text="${user.displayname}"></span></li>
-                    <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
-                    <li><strong>Registration Date:</strong> <span th:text="${#dates.format(user.registrationdate, 'dd/MM/yyyy')}"></span></li>
+                    <li><strong class="text-body-secondary">Username:</strong> <span class="text-body-secondary" th:text="${user.username}"></span></li>
+                    <li><strong class="text-body-secondary">Display Name:</strong> <span class="text-body-secondary"th:text="${user.displayname}"></span></li>
+                    <li  th:if="${userlog}"><strong class="text-body-secondary" >Email:</strong> <span class="text-body-secondary" th:text="${user.email}"></span></li>
+                    <li><strong class="text-body-secondary">Registration Date:</strong> <span class="text-body-secondary"th:text="${#dates.format(user.registrationdate, 'dd/MM/yyyy')}"></span></li>
                 </ul>
+                <button id="UpdateI"th:if="${userlog}" type="button" class="btn btn-primary btn-sm" style="margin-left: 65px;" onclick="showForm('updateAccountForm')"><b>Update Account</b></button>
             </div>
+
+            <div id="OverlayD" class="z-3 position-absolute p-5 rounded-3">
+                <form id="updateAccountForm" th:action="@{/updateAccount}" th:object="${user}" method="post" style="display:none; ">
+                    <div class="mb-3">
+                        <label for="username" >Username:</label>
+                        <input type="text"  class="form-control"id="username" th:field="*{username}"> 
+                      </div>
+                      <div class="mb-3">
+                        <label for="displayname">Display Name:</label>
+                        <input type="text" id="displayname" th:field="*{displayname}" class="form-control">
+                      </div>
+                      <div class="mb-3">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-control" aria-describedby="emailHelp">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                      </div>
+                      <button type="submit"class="btn btn-primary" >Update</button>
+                      <a id="close" type="button"  onclick="hideForm('updateAccountForm')">Close</a>
+                </form>
+            </div>
+            
             <div class="profile-picture">
-                <img th:src="'data:image/*;base64,' + ${pfp}" alt="Profile Picture"/>
+                <img th:src="${pfp != null && !pfp.isEmpty()} ? 'data:image/*;base64,' + ${pfp} : 'https://e1.pxfuel.com/desktop-wallpaper/924/746/desktop-wallpaper-no-profile-pic-no-profile.jpg'" alt="Profile Picture"/>
+                <button id="Edit"type="button" onclick="showForm('uploadProfilePictureForm')"class="z-1 position-absolute "  th:if="${userlog}">Edit Picture</button>
+            <form id="uploadProfilePictureForm" th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data" style="display:none;" class="z-1 position-absolute ">
+                <div class="form-group" >
+                    <label class="file-input-wrapper">
+                        <span class="file-input">Select file(.JPG)</span>
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                    </label><br>
+                    <div id="Bott">
+                    <button type="submit" class="btn btn-primary"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .60rem; top: 10px;" >Upload Picture</button>
+                    <button type="button" class="btn btn-primary"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .60rem;"onclick="hideForm('uploadProfilePictureForm')">Close</button>
+                    </div>
+                </div>
+            </form>
             </div>
         </section>
-        
-        <section class="reviews">
-            <h2>Favorite Movies</h2>
-            <div th:if="${!#lists.isEmpty(favorite)}">
-                <ul>
-                    <li th:each="favoritemovies : ${favorite}">
-                        <a th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text="${favoritemovies.title}"></a>
-                        <form th:if="${userlog}" th:action="@{/deleteFavouriteAssociation}" method="post" style="display: inline;">
-                            <input type="hidden" name="movieId" th:value="${favoritemovies.id}"/>
-                            <input type="hidden" name="userId" th:value="${user.id}"/>
-                            <button type="submit">Remove</button>
-                        </form>
-                        <hr/>
-                    </li>
-                </ul>
+        <hr>
+        <section class="reviews" style="margin-top: 20px;">
+            <h2 style="margin-left: 15px; text-decoration:wavy">Favorite Movies</h2>
+            
+            <div th:if="${!#lists.isEmpty(favorite)}" >
+                <div class="row my- 4 container-fluid" > 
+                    <div class="col-3" th:each="favoritemovies : ${favorite}" style="left: 20px;">
+                        <div class="card"  style="width: 250px; height: 250px; max-width: 250px; max-height: 250px; margin-bottom: 15px; border-radius: 10%;">
+                            <img th:src="${moviepic.get(favoritemovies) != null && !moviepic.get(favoritemovies).isEmpty()} ? 'data:image/*;base64,' + ${moviepic.get(favoritemovies)} : 'https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg'" alt="Image" style="border-top-left-radius: 10%; border-top-right-radius: 10%; width: 245px;"/>
+                            <div class="card-body" style="text-align: center;">
+                                <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text="${favoritemovies.title}" style="display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+                                position: relative; bottom: 10px;"></a>
+                            </div>
+                            <form th:if="${userlog}" th:action="@{/deleteFavouriteAssociation}" method="post" style="display: inline;">
+                                <input type="hidden" name="movieId" th:value="${favoritemovies.id}"/>
+                                <input type="hidden" name="userId" th:value="${user.id}"/>
+                                <button type="submit" class="btn btn-warning btn-sm " style="position: absolute; left: 35%; bottom: 15px; font-weight: 600;">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div th:if="${#lists.isEmpty(favorite)}">
-                <h3>No favorite movies found.</h3>
+                <h5 style="margin-left: 30px;">No favorite movies found.</h5>
+              
             </div>
         </section>
-
-        <section class="account-actions" th:if="${userlog}">
-            <h2>Update Account</h2>
-            <button type="button" onclick="showForm('updateAccountForm')">Show Update Form</button>
-            <form id="updateAccountForm" th:action="@{/updateAccount}" th:object="${user}" method="post" style="display:none;">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" th:field="*{username}">
-                </div>
-                <div class="form-group">
-                    <label for="displayname">Display Name:</label>
-                    <input type="text" id="displayname" th:field="*{displayname}">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" th:field="*{email}">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" th:field="*{password}">
-                </div>
-                <div class="form-group">
-                    <button type="submit">Update Account</button>
-                    <button type="button" onclick="hideForm('updateAccountForm')">Hide Update Form</button>
-                </div>
-            </form>
-
-            <h2>Upload Profile Picture</h2>
-            <button type="button" onclick="showForm('uploadProfilePictureForm')">Show Upload Form</button>
-            <form id="uploadProfilePictureForm" th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data" style="display:none;">
-                <div class="form-group">
-                    <label for="profilePicture">Choose a profile picture (JPG):</label>
-                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <button type="submit">Upload Picture</button>
-                    <button type="button" onclick="hideForm('uploadProfilePictureForm')">Hide Upload Form</button>
-                </div>
-            </form>
-            <br><br><br>
-            <form id="deleteAccountForm" th:action="@{/deleteAccount}" method="post">
-                <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
+        <hr>
+        <section class="account-actions" >
+        
+          
+           
+            <form  id="deleteAccountForm" th:action="@{/deleteAccount}" th:if="${userlog}" method="post">
+                <button  class="btn btn-danger" style="margin-left: 85%; margin-bottom: 10px;" type="submit" onclick="return confirm('Are you sure you want to delete your account?')"><b>Delete Account</b></button>
             </form>
         </section>
     </main>
