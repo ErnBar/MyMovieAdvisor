@@ -142,4 +142,6 @@
     margin-right: 80px;
     position: relative;
 }
-
+.card:hover {
+    opacity: 0.93;
+  }
