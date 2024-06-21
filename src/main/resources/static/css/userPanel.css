@@ -1,142 +1,145 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+#Body {
+    background-color: whitesmoke
 }
 
-nav {
-    background-color: #333;
-    color: white;
+#navbarNav{
+    left: 10px;
+    
+    position: relative;
+    
+}
+
+
+.user-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: nowrap;
+    margin-left: 310px;
+    margin-top: 30px;
+   
+
 }
 
-.nav-left,
-.nav-right {
-    display: flex;
-    align-items: center;
-}
-
-.nav-left h3,
-.nav-right a {
-    margin: 0 10px;
-    color: white;
-    text-decoration: none;
-}
-
-.nav-left h3 a,
-.nav-right a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    transition: background-color 0.3s;
-}
-
-.nav-left h3 a:hover,
-.nav-right a:hover {
-    background-color: #555;
-}
-
-main {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    color: #333;
-}
-
-.welcome-message ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.welcome-message li {
-    margin-bottom: 10px;
-    color: #555;
+.welcome-message {
+    flex: 1; 
+    padding-right: 20px; 
+    
 }
 
 .profile-picture {
-    text-align: center;
+    flex-shrink: 0; 
+    height: 200px; 
+    width: 200px;
+    border-radius: 50%;
+    margin-right: 39%;
+    display: flex;
 }
 
 .profile-picture img {
+    width: 100%; 
+    height: auto; 
+    max-width: 100%; 
     border-radius: 50%;
-    max-width: 150px;
 }
 
-.reviews ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.reviews li {
-    margin-bottom: 10px;
-}
-
-.reviews hr {
+#UpdateI{
+    background-color: rgb(5, 138, 255);
     border: none;
-    border-bottom: 1px solid #ddd;
-    margin: 10px 0;
 }
 
-form {
-    margin-bottom: 20px;
-}
-
-button,
-input[type="submit"] {
-    background-color: #333;
-    color: white;
+#UpdateI:hover{
+    background-color: rgb(5, 69, 124);
     border: none;
-    padding: 10px 20px;
+}
+
+
+#OverlayD{
+    
+    left: 500px;
+    top: 60px;
+    position: fixed;
+}
+
+#updateAccountForm{
+    padding: 10%;
+    background-color:rgb(243, 243, 243);
+    border-radius: 3%;
+    width: 150%; 
+    box-shadow: 0 4px 8px rgba(27, 10, 184, 0.555);
+    
+}
+
+#close{
+    left: 140px;
+    position: relative;
+    font-weight: 900;
+    color: #0d6efd;
+}
+#uploadProfilePictureForm{
+    top: 150px;
+    left: 58%;
+    align-items: center;
+}
+#Edit{
+    background-color: rgba(250, 235, 215, 0);
+    border: none;
+    color: #0d6dfd00;
+    margin-top: 84px;
+    left: 58.5%;
+}
+
+#Edit:hover{
+    color: black;
+    font-weight: 800;
+    font-size: large;
+    text-decoration: underline;
+    background-color: rgba(163, 160, 157, 0.678);
+    border: none;
+    padding: 5px;
+    width: auto; /* Imposta larghezza automatica per adattarsi al contenuto */
+    height: auto; /* Imposta altezza automatica per adattarsi al contenuto */
+    border-radius: 5%;
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input {
+    font-size: 16px;
+    font-weight: 500;
+    color: #030303;
+    background-color: #e2e7e2;
+    border: #0d6efd;
     border-radius: 5px;
+    padding: 10px ;
+    cursor:cell;    
+    display: inline-block;
+}
+
+.file-input :hover{
+    background-color: #acacac;
+    border-radius: 5px;
+    padding: 10px ;
+    cursor:cell;    
+    display: inline-block;
+}
+
+.file-input-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
     cursor: pointer;
 }
 
-button:hover,
-input[type="submit"]:hover {
-    background-color: #555;
+
+#Bott{
+    margin-right: 80px;
+    position: relative;
 }
 
-button[type="button"] {
-    background-color:black;
-}
-
-button[type="button"]:hover {
-    background-color:#555;
-}
-
-#deleteAccountForm button {
-    background-color: black;
-    margin-top: 20px; /* Aggiunto spazio sopra il bottone di delete */
-}
-
-#deleteAccountForm button:hover {
-    background-color: #555;
-}
-
-form .form-group {
-    margin-bottom: 15px;
-}
-
-form .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-form .form-group input,
-form .form-group textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
