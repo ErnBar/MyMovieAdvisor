@@ -12,7 +12,7 @@ main {
     margin: 20px auto;
     padding: 20px;
     background-color: rgb(2, 2, 2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 7px solid #c0bebe1a;
     border-radius: 15px;
     color: #ddd;
 }
