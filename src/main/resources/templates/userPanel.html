@@ -87,8 +87,8 @@
             <div th:if="${!#lists.isEmpty(favorite)}" >
                 <div class="row my- 4 container-fluid" > 
                     <div class="col-3" th:each="favoritemovies : ${favorite}" style="left: 20px;">
-                        <div class="card"  style="width: 250px; height: 250px; max-width: 250px; max-height: 250px; margin-bottom: 15px; border-radius: 10%;">
-                            <img src="https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg" alt="Image" style="border-top-left-radius: 10%; border-top-right-radius: 10%; width: 245;"/>
+                        <div class="card" th:each="img : ${moviepic}"  style="width: 250px; height: 250px; max-width: 250px; max-height: 250px; margin-bottom: 15px; border-radius: 10%;">
+                            <img th:src="${img != null && !img.isEmpty()} ? 'data:image/*;base64,' + ${img} : 'https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg'" alt="Image" style="border-top-left-radius: 10%; border-top-right-radius: 10%; width: 245;"/>
                             <div class="card-body" style="text-align: center;">
                                 <a class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" th:text="${favoritemovies.title}" style="display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
                                 position: relative; bottom: 10px;"></a>

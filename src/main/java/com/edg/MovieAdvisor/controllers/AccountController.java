@@ -1,7 +1,9 @@
 package com.edg.MovieAdvisor.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,19 @@ public class AccountController {
         if (user.getProfilepicture() != null) {
             pfp = Base64.getEncoder().encodeToString(user.getProfilepicture());
         }
+
+        ArrayList<String> moviesimg = new ArrayList<String>();
+        String img="";
+        if (user.getFavoriteMovies()!= null) {
+            for(Movie movie:user.getFavoriteMovies()){
+                if (movie.getMoviepicture()!=null) {
+                    img= Base64.getEncoder().encodeToString(movie.getMoviepicture());
+                    moviesimg.add(img);
+                }
+                
+            }
+        }
+        model.addAttribute("moviepic", moviesimg);
         model.addAttribute("admin", admin);
         model.addAttribute("userlog", userlog);
         model.addAttribute("user", user);
