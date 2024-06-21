@@ -3,7 +3,8 @@ package com.edg.MovieAdvisor.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,15 +72,15 @@ public class AccountController {
             pfp = Base64.getEncoder().encodeToString(user.getProfilepicture());
         }
 
-        ArrayList<String> moviesimg = new ArrayList<String>();
-        String img="";
-        if (user.getFavoriteMovies()!= null) {
-            for(Movie movie:user.getFavoriteMovies()){
-                if (movie.getMoviepicture()!=null) {
-                    img= Base64.getEncoder().encodeToString(movie.getMoviepicture());
-                    moviesimg.add(img);
+        Map<Movie, String> moviesimg = new HashMap<>();
+        if (user.getFavoriteMovies() != null) {
+            for (Movie movie : user.getFavoriteMovies()) {
+                if (movie.getMoviepicture() != null) {
+                    String img = Base64.getEncoder().encodeToString(movie.getMoviepicture());
+                    moviesimg.put(movie, img);
+                } else {
+                    moviesimg.put(movie, "");
                 }
-                
             }
         }
         model.addAttribute("moviepic", moviesimg);
