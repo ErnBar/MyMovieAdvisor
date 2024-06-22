@@ -4,9 +4,24 @@ body {
     margin: 0;
     padding: 0;
 }
+#divS::-webkit-scrollbar {
+    display: none;
+}
+#link  {
+    color: #ddd !important;
+}
+.text-body-secondary {
+    --bs-text-opacity: 1;
+    color: rgb(99 106 113 / 75%) !important;
+}
+#trailer {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
-
-
+#trailer:hover {
+    transform: scale(0.97); 
+    opacity: 0.8; 
+}
 main {
     max-width: 800px;
     margin: 20px auto;

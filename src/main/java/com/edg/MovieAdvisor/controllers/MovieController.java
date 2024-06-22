@@ -231,7 +231,7 @@ public class MovieController {
             return "redirect:/formLogin";
         }
         Review review = reviewService.findById(reviewId);
-        if (review == null || !review.getOp().getId().equals(loggedUser.getId())) {
+        if (review == null) {
             return "redirect:/error";
         }
         Movie movie = review.getMovie();
