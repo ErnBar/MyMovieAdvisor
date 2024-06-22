@@ -4,6 +4,12 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.img-fixed-size {
+    width: 200px; 
+    height: auto; 
+}
+
 #divS::-webkit-scrollbar {
     display: none;
 }
@@ -17,7 +23,37 @@ body {
 #trailer {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
+#reviews {
+    display: none;
+}
+label[for="score"] {
+   
+    font-weight: bold;
+    color: #888787;
+}
 
+input[type="number"] {
+    font-weight: 800;
+    padding: 5px;
+    border: 2px solid #12184b;
+    border-radius: 4px;
+   
+}
+#floatingTextarea{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    font-weight: 600;
+    resize: none;
+    outline: none;
+}
+
+#floatingTextarea::-webkit-scrollbar {
+    display: none;
+}
 #trailer:hover {
     transform: scale(0.97); 
     opacity: 0.8; 
