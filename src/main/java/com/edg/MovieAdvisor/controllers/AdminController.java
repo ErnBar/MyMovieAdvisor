@@ -1,4 +1,8 @@
 package com.edg.MovieAdvisor.controllers;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,6 +105,18 @@ public class AdminController {
                     isAdmin = false;
                 }
             }
+        Map<Movie, String> moviesimg = new HashMap<>();
+        if (movieService.findAll() != null) {
+            for (Movie movie : movieService.findAll()) {
+                if (movie.getMoviepicture() != null) {
+                    String img = Base64.getEncoder().encodeToString(movie.getMoviepicture());
+                    moviesimg.put(movie, img);
+                } else {
+                    moviesimg.put(movie, "");
+                }
+            }
+        }
+        model.addAttribute("moviepic", moviesimg);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("movies", movieService.findAll());
         model.addAttribute("movie", new Movie());
