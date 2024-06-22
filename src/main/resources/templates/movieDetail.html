@@ -36,9 +36,10 @@
     <main>
         <section class="user-info">
             <div class="welcome-message">
-                <div class="picture">
-                    <img th:src="'data:image/*;base64,' + ${moviepic}" alt="Profile Picture"/>
+                <div >
+                    <img th:src="'data:image/*;base64,' + ${moviepic}" class="img-fixed-size rounded mx-auto d-block"  alt="..."/>
                 </div>
+                <br>
                 <ul style="display: grid; grid-template-columns: repeat(5, auto); gap: 10px; text-align: center; ">
                     <li th:if="${admin}"><strong>ID:</strong><span th:text="${movie.id}"></span></li>
                     <li><strong>TITLE <br></strong> <span th:text="${movie.title}"></span></li>
@@ -90,7 +91,7 @@
             </div>
         </section>
         <section class="reviews">
-            <h2 style="color: #ddd;">Movie Reviews</h2>
+            <h2 style="color: #ddd;">Reviews</h2>
             <div id="divS" class="simplebar " th:if="${!#lists.isEmpty(movieReview)}" style="max-height: 400px; overflow-y: auto;">
                 <ul>
                     <li th:each="review : ${movieReview}">
@@ -98,7 +99,7 @@
                             <a id="link" th:href="@{'/userPanel?displayname=' + ${review.op.displayname}}" th:text=${review.op.displayname} class="link-secondary  link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"></a>
                             <p style="display: inline; margin-left: 40px;color: #dddddd98;">Score: <span style="color: #dddddd98;" th:text="${review.score}"></span></p>
                         </div>
-                        <p style="margin-top: 1rem;"><em><span style="color: #ddddddd0;" th:text="${review.text}"></span></em></p>
+                        <p  style="margin-top: 1rem; word-wrap: break-word;"><em><span style="color: #ddddddd0;" th:text="${review.text}"></span></em></p>
                         <p style="font-size: small;"><span class="text-body-secondary" th:text="${#dates.format(review.review_date, 'dd/MM/yyyy')}"></span></p>
                         <form th:if="${loggedUser.id == review.op.id || admin}" th:action="@{/deleteReview}" method="post">
                             <input type="hidden" name="reviewId" th:value="${review.id}" />
@@ -112,6 +113,26 @@
                 <h6>No reviews found.</h6>
             </div>
         </section>
+        
+        <section>
+            <button onclick="showForm('reviews')" class="btn btn-outline-light">Add Review</button>
+            <form id="reviews" th:action="@{/addReview}" method="post">
+                <div style="margin-top: 10px;">
+                    <input type="hidden" name="movieId" th:value="${movie.id}"/>
+                    <label for="score"><p>Score:</p></label>
+                    <input type="number" id="score" name="score" min="1" max="5" step="1" required oninput="validity.valid||(value='');" />
+                    <div class="form-floating">
+                        <textarea class="form-control"  id="floatingTextarea" name="text" maxlength="300"></textarea> 
+                    </div>
+                    <div style="margin-top: 5px;   display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-outline-light btn-sm">Submit</button>
+                        <button type="button"  style="margin-left: 5px;" class="btn-sm btn btn-outline-light" onclick="hideForm('reviews')">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+
         <section class="update-picture" th:if="${admin}">
             <h2>Update Movie Picture</h2>
             <form th:action="@{/uploadMoviePicture}" method="post" enctype="multipart/form-data">
@@ -130,12 +151,13 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="date" th:value="${movie.date}" required/>
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" th:value="${movie.description}"  required style="width: 785px; height: 300px;"></textarea>
+                <textarea class="form-control" id="description" name="description" th:value="${movie.description}"  required style="width: 740px; max-height: 300px;"></textarea>
                 <label for="trailer">Trailer:</label>
-                <input type="text" id="trailer" name="trailer" th:value="${movie.trailer}" placeholder="YOUTUBE URL"/>
+                <input type="text"  name="trailer" th:value="${movie.trailer}" placeholder="YOUTUBE URL"/>
                 <button type="submit">Update movie</button>
             </form>
         </section>
+
         <section class="associate-director" th:if="${admin}">
             <h2>Director Association</h2>
             <form th:action="@{/directorAssociation}" method="post">
@@ -144,9 +166,11 @@
                 <input type="text" id="directorNameInput" name="directorName" onkeyup="searchDirectors()" autocomplete="off" required/>
                 <select id="directorList" name="directorNameSelect" size="5" style="display:none;">
                 </select>
-                <button type="submit">Submit</button>
+                <button class="btn btn-primary"
+                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" type="submit">Submit</button>
             </form>
         </section>
+
         <section class="associate-actors" th:if="${admin}">
             <h2>Actors Association</h2>
             <form th:action="@{/actorsAssociation}" method="post">
@@ -155,20 +179,19 @@
                 <input type="text" id="actorNameInput" name="actorName" onkeyup="searchActors()" autocomplete="off" required/>
                 <select id="actorList" name="actorNameSelect" size="5" style="display:none;">
                 </select>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-        <section>
-            <h2>Add Review</h2>
-            <form th:action="@{/addReview}" method="post">
-                <input type="hidden" name="movieId" th:value="${movie.id}"/>
-                <label for="score">Score:</label>
-                <input type="number" id="score" name="score" min="1" max="5" required/>
-                <label for="text">Text:</label>
-                <textarea id="text" name="text" required style="width: 785px; height: 300px;"></textarea>
-                <button type="submit">Add Review</button>
+                <button class="btn btn-primary"
+                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" type="submit">Submit</button>
             </form>
         </section>
     </main>
+    <script>
+        function showForm(formId) {
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function hideForm(formId) {
+            document.getElementById(formId).style.display = 'none';
+        }
+    </script>
 </body>
 </html>
