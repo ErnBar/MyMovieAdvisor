@@ -97,7 +97,7 @@
             <div th:if="${!#lists.isEmpty(favorite)}" >
                 <div class="row my- 4 container-fluid" > 
                     <div class="col-3" th:each="favoritemovies : ${favorite}" style="left: 20px;">
-                        <div class="card"  style="width: 250px; height: 290px; max-width: 250px; max-height: 290px; margin-bottom: 15px; border-radius: 8%; color: aliceblue;  ">
+                        <div class="card"  style=" border: 0; width: 250px; height: 290px; max-width: 250px; max-height: 290px; margin-bottom: 15px; border-radius: 8%; color: aliceblue;  ">
                             <div>    
                                 <a th:href="@{'/movieDetail?title=' + ${favoritemovies.title}}" > 
                                     <div style=" justify-content: center; align-items: center; height: 100%; width: 100%;">
