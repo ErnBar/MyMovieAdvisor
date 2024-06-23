@@ -142,6 +142,21 @@
     margin-right: 80px;
     position: relative;
 }
+.card{
+    transition: transform 0.1s ease;
+}
+
 .card:hover {
-    opacity: 0.93;
+    transform: scale(0.97);
   }
+.card{
+    transition: transform 0.15s ease;
+}
+
+.card3{
+    transition: transform 0.20s ease;
+}
+.card3:hover{
+    transform: scale(1.05);
+}
+

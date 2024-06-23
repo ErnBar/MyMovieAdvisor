@@ -5,29 +5,12 @@ body {
     background-color: #f4f4f4;
 }
 
-nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 
-nav h3 {
-    margin: 0;
-}
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px;
-    transition: background-color 0.3s;
-}
 
-nav a:hover {
-    background-color: #555;
-}
+
+
+
 
 main {
     max-width: 1200px;
@@ -44,60 +27,62 @@ h1 {
     margin-bottom: 40px;
 }
 
-.table-container {
-    overflow-x: auto;
+
+.card{
+    transition: transform 0.1s ease;
 }
 
-table {
+.card:hover {
+    transform: scale(0.97);
+  }
+.card{
+    transition: transform 0.15s ease;
+}
+
+.card3{
+    transition: transform 0.20s ease;
+}
+.card3:hover{
+    transform: scale(1.10);
+}
+
+#aa {
+    transition: transform 0.55s ease, background-color 0.55s ease, color 0.55s ease;
+}
+
+#aa:hover {
+    background-color: rgba(245, 245, 245, 0.712)!important;
+    color: rgb(0, 0, 0)!important;
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
-table thead {
-    background-color: #333;
-    color: #fff;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(7, 5, 5, 0.863)!important;
 }
 
-table th, table td {
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
+
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30;
+    padding-top: 50px;
+    background-color: rgba(7, 5, 5, 0.479);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-table tbody tr:hover {
-    background-color: #f1f1f1;
+#divS::-webkit-scrollbar {
+    display: none;
 }
-
-button {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-.delete-btn {
-    background-color: #f44336;
-}
-
-.delete-btn:hover {
-    background-color: #da190b;
-}
-
 form {
     margin-top: 20px;
 }
@@ -118,18 +103,11 @@ form input, form textarea {
     box-sizing: border-box;
 }
 
-form button[type="submit"] {
-    background-color: #4CAF50;
-}
 
-form button[type="button"] {
-    background-color: #f44336;
-    margin-left: 10px;
-}
 
-form button[type="button"]:hover {
-    background-color: #da190b;
-}
-#delete-movies{
-    background-color: #da190b;
-}
+
+
+
+
+
+
