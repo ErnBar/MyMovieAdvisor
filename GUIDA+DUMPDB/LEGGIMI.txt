@@ -1,0 +1,5 @@
+Prima di avviare il progetto creare un db chiamato "movieadvisordb" oppure importare il dump del database(con insert gia fatte) situato in questa cartella, dopo averlo creato/importato avviare direttamente il progetto e creerà tutte le tabelle in automatico qualora non aveste usato il dump ma semplicemente creato il db;
+
+per registrarsi come admin ed avere tutte le funzionalità di add/update/delete registrarsi con username "admin", nel caso di import del dump inserire in fase di login "username: admin; password: admin";
+
+per l'upload delle foto usare png/jpg di massimo 2mb;
