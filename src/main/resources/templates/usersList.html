@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Users List</title>
     <link rel="stylesheet" href="/css/userList.css" type="text/css">
+    <script src="/js/userList.js" defer></script>
 </head>
 <body>
     <nav>
@@ -26,7 +27,7 @@
                         <th>Delete User</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="users-tbody">
                     <tr th:each="user : ${users}">
                         <td th:text="${user.id}"></td>
                         <td th:text="${user.username}"></td>
@@ -42,6 +43,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div id="pagination-controls">
+            <button id="prev-btn" onclick="changePage(-1)" disabled>Previous</button>
+            <span id="page-info">Page 1</span>
+            <button id="next-btn" onclick="changePage(1)">Next</button>
         </div>
     </main>
 </body>
