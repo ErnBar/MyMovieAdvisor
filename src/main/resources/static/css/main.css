@@ -33,10 +33,10 @@ body {
 
 
 #search-results {
-    position: absolute;
+    position:absolute;
     top: 50px;
     width: 300px;
-    margin-left: 38.2%;
+    
     left: 0;
     right: 0;
     background-color: #f7f6f6;

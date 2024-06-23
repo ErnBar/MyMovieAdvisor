@@ -29,13 +29,15 @@
                     <a class="nav-link" th:href="@{'/userPanel?displayname=' + ${actualUser}}" th:text="${actualUser}"></a>
                   </li>
                   <li style="margin-left: 160px!important;">
+                    <div style="position: absolute;">
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" aria-label="Search" id="search-film" name="title" placeholder="Search Movie" onkeyup="searchFilm()"  style="width: 300px;">
                         <ul id="search-results" ></ul>
                     </form>
+                    </div>
                   </li>
                   <li>
-                    <div th:if="${randomTitle != null}">
+                    <div th:if="${randomTitle != null}" style="margin-left: 320px; position: relative;" >
                         <p id="random" th:text="${randomTitle}" hidden></p>
                         <button id="random-button" class="btn btn-outline-primary">Random Movie</button>
                     </div>
