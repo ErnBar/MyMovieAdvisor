@@ -25,19 +25,22 @@
                     <a class="nav-link" href="/moviesList">Movies</a>
                   </li>
                   
-                  <li class="nav-item" style="margin-left: 750px;" >
+                  <li class="nav-item"  >
                     <a class="nav-link" th:href="@{'/userPanel?displayname=' + ${actualUser}}" th:text="${actualUser}"></a>
                   </li>
-                  <li class="nav-item" th:if="${admin}" style="left:20px;">
+                 
+                <div style="display: flex; justify-content: flex-end; position: absolute; right: 10px;">
+                  <li class="nav-item" th:if="${admin}" >
                     <a  class="nav-link" href="/usersList">AdminPanel</a>
                   </li>
-                  <li class="nav-item" style="margin-left: 20px;">
+                  <li class="nav-item" >
                     <a class="nav-link" href="/logout">Logout</a>
                   </li>
+                </div>
                 </ul>
               </div>
             </div>
-          </nav>
+        </nav>
           
 
     <main style="margin-top: 80px;">
