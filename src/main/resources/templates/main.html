@@ -39,7 +39,7 @@
                 <tbody>
                     <tr th:each="movie : ${topMovie}">
                         <td><a th:href="@{'/movieDetail?title=' + ${movie.title}}" th:text="${movie.title}"></a></td>
-                        <td th:text="${movie.score != null ? movie.score : 'No scores yet'}"></td>
+                        <td th:text="${movie.score != null ? #numbers.formatDecimal(movie.score, 1, 1) : 'No scores yet'}"></td>
                     </tr>
                 </tbody>
             </table>
