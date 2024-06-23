@@ -123,6 +123,9 @@
         
         <section>
             <button onclick="showForm('reviews')" class="btn btn-outline-light">Add Review</button>
+            <div th:if="${error}" style="color: red; margin-top: 10px;">
+                <p th:text="${error}"></p>
+            </div>
             <form id="reviews" th:action="@{/addReview}" method="post">
                 <div style="margin-top: 10px;">
                     <input type="hidden" name="movieId" th:value="${movie.id}"/>

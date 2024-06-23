@@ -103,6 +103,7 @@ public class AdminController {
                 User u = (User) utente;
                 if (!u.getUsername().equalsIgnoreCase("admin")) {
                     isAdmin = false;
+                    model.addAttribute("actualUser", u.getDisplayname());
                 }
             }
         Map<Movie, String> moviesimg = new HashMap<>();

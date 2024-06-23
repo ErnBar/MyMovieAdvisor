@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edg.MovieAdvisor.models.Actor;
 import com.edg.MovieAdvisor.models.Director;
@@ -215,7 +216,8 @@ public class MovieController {
     }
 
     @PostMapping("/addReview")
-    public String addReview(@RequestParam("movieId") Long movieId,HttpSession session,@ModelAttribute("review") @Validated Review review, Model model) {
+    public String addReview(@RequestParam("movieId") Long movieId,HttpSession session,@ModelAttribute("review") @Validated Review review, Model model,
+    RedirectAttributes redirectAttributes) {
         Movie movie = movieService.findById(movieId);
         if (movie == null) {
             return "redirect:/error";
@@ -223,6 +225,10 @@ public class MovieController {
         User loggedUser = (User) session.getAttribute("user");
         if (loggedUser == null) {
             return "redirect:/formLogin";
+        }
+        if (reviewService.existsByMovieAndOp(movie, loggedUser)) {
+            redirectAttributes.addFlashAttribute("error", "You have already reviewed this movie.");
+            return "redirect:/movieDetail?title=" + movie.getTitle();
         }
         review.setMovie(movie);
         review.setOp(loggedUser);
