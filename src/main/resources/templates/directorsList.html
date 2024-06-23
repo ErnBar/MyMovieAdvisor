@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Directors List</title>
     <link rel="stylesheet" href="/css/directorsList.css" type="text/css">
+    <script src="/js/directorsList.js" defer></script>
 </head>
 <body>
     <nav>
@@ -25,7 +26,7 @@
                         <th>Delete Director</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="directors-tbody">
                     <tr th:each="director : ${directors}">
                         <td th:text="${director.id}"></td>
                         <td><a th:href="@{'/directorDetail?name=' + ${director.name}}" th:text="${director.name}"></a></td>
@@ -40,6 +41,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div id="pagination-controls">
+            <button id="prev-btn" onclick="changePage(-1)" disabled>Previous</button>
+            <span id="page-info">Page 1</span>
+            <button id="next-btn" onclick="changePage(1)">Next</button>
         </div>
         <button id="show-form-btn" onclick="toggleFormVisibility()">Show Add Director Form</button>
         <form id="director-form" th:action="@{/directorAdd}" th:object="${director}" method="post" style="display: none;">
@@ -61,18 +67,5 @@
             </div>
         </form>
     </main>
-    <script>
-        function toggleFormVisibility() {
-            const form = document.getElementById('director-form');
-            const showFormBtn = document.getElementById('show-form-btn');
-            if (form.style.display === 'none') {
-                form.style.display = 'block';
-                showFormBtn.style.display = 'none';
-            } else {
-                form.style.display = 'none';
-                showFormBtn.style.display = 'block';
-            }
-        }
-    </script>
 </body>
 </html>
