@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Movie Detail</title>
@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.min.css">
     <script src="js/movieDetails.js" defer></script>
 </head>
-    <body >
-        <img th:src="'data:image/*;base64,' + ${moviepic}" class="background-image"/>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" >
+
+    <body>
+        <div  class="background-image" >
+            <img th:src="'data:image/*;base64,' + ${moviepic}"/>
+        </div> 
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
             <div class="container-fluid">
               <b class="navbar-brand" style="color:#0db1fdce ;"> MyMovieAdvisor.</b>
               <div class="collapse navbar-collapse" id="navbarNav">
@@ -24,16 +27,23 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/moviesList">Movies</a>
                   </li>
-                  <li class="nav-item">
+                  
+                  <li class="nav-item" style="margin-left: 750px;" >
+                    <a class="nav-link" th:href="@{'/userPanel?displayname=' + ${actualUser}}" th:text="${actualUser}"></a>
+                  </li>
+                  <li class="nav-item" th:if="${admin}" style="left:20px;">
+                    <a  class="nav-link" href="/usersList">AdminPanel</a>
+                  </li>
+                  <li class="nav-item" style="margin-left: 20px;">
                     <a class="nav-link" href="/logout">Logout</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
-     
+          
 
-    <main>
+    <main style="margin-top: 80px;">
         <section class="user-info">
             <div class="welcome-message">
                 <div >
@@ -44,7 +54,7 @@
                     <li th:if="${admin}"><strong>ID:</strong><span th:text="${movie.id}"></span></li>
                     <li><strong>TITLE <br></strong> <span th:text="${movie.title}"></span></li>
                     <li><strong>DIRECTOR <br></strong><span th:if="${director!=null}"><a id="link" class="link-secondary  link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{'/directorDetail?name=' + ${director.name}}" th:text=${director.name} ></a></span></li>
-                    <li><strong>DATE<br></strong> <span th:text="${movie.date}"></span></li>
+                    <li><strong>DATE<br></strong> <span th:text="${#dates.format(movie.date,'dd/MM/yyyy') }"></span></li>
                     <li><strong>AVERAGE SCORE <br></strong><span  th:text="${averageScore != null ? #numbers.formatDecimal(averageScore, 1, 1) : 'No reviews yet'}"></span></li>
                 </ul>   
                 

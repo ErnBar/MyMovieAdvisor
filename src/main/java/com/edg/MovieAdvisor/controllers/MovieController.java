@@ -57,13 +57,18 @@ public class MovieController {
             return "redirect:/formLogin";
         }
         User loggedUser = (User)session.getAttribute("user");
-        
+        String actualUser="";
         Movie movie = movieService.findByTitle(title);
         if (movie==null) {
             return "redirect:/error";
         }
         boolean admin=false;
         if (loggedUser.getUsername().equalsIgnoreCase("admin")) {
+            admin=true;
+        }
+        if (!loggedUser.getUsername().equalsIgnoreCase("admin")) {
+            actualUser += loggedUser.getDisplayname();
+        }else {
             admin=true;
         }
         String moviepic = "";
@@ -73,6 +78,7 @@ public class MovieController {
         List<Director> directors = directorService.findAll();
         List<Actor> actors = actorService.findAll();
         Double averageScore = movieService.getAverageScore(movie.getId());
+        model.addAttribute("actualUser", actualUser);
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("movie", movie);
         model.addAttribute("admin", admin);
