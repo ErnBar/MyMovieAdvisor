@@ -76,9 +76,14 @@ public class MovieController {
         if (movie.getMoviepicture() != null) {
             moviepic = Base64.getEncoder().encodeToString(movie.getMoviepicture());
         }
+        boolean review=false;
+        if (reviewService.existsByMovieAndOp(movie, loggedUser)) {
+            review=true;
+        }
         List<Director> directors = directorService.findAll();
         List<Actor> actors = actorService.findAll();
         Double averageScore = movieService.getAverageScore(movie.getId());
+        model.addAttribute("reviewed", review);
         model.addAttribute("actualUser", actualUser);
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("movie", movie);
@@ -216,8 +221,7 @@ public class MovieController {
     }
 
     @PostMapping("/addReview")
-    public String addReview(@RequestParam("movieId") Long movieId,HttpSession session,@ModelAttribute("review") @Validated Review review, Model model,
-    RedirectAttributes redirectAttributes) {
+    public String addReview(@RequestParam("movieId") Long movieId,HttpSession session,@ModelAttribute("review") @Validated Review review, Model model) {
         Movie movie = movieService.findById(movieId);
         if (movie == null) {
             return "redirect:/error";
@@ -225,10 +229,6 @@ public class MovieController {
         User loggedUser = (User) session.getAttribute("user");
         if (loggedUser == null) {
             return "redirect:/formLogin";
-        }
-        if (reviewService.existsByMovieAndOp(movie, loggedUser)) {
-            redirectAttributes.addFlashAttribute("error", "You have already reviewed this movie.");
-            return "redirect:/movieDetail?title=" + movie.getTitle();
         }
         review.setMovie(movie);
         review.setOp(loggedUser);
