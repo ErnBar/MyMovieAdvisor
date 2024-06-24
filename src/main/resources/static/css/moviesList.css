@@ -8,6 +8,51 @@ body {
 
 
 
+#search-results {
+    position:absolute;
+    top: 50px;
+    width: 300px;
+    
+    left: 0;
+    right: 0;
+    background-color: #f7f6f6;
+    color: #000;
+    
+    border-radius: 6px;
+    
+    list-style-type: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 500!important;
+}
+
+
+
+
+#search-results {
+    scrollbar-width: thin; 
+    
+}
+
+
+
+#movieslist{
+    color: #fff;
+    text-decoration: none;
+}
+
+#search-results li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-results li:hover {
+    background-color: rgba(41, 131, 190, 0.849);
+}
+
+
 
 
 

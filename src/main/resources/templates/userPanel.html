@@ -5,6 +5,7 @@
     <title>User Panel</title>
     <link rel="stylesheet" href="/css/userPanel.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="js/main.js" defer></script>
 </head>
 <body id="Body" style="padding-top: 60px;">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark"style="position: fixed; top: 0;  width: 100%; z-index: 1000;"  >
@@ -18,8 +19,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="/moviesList">Movies</a>
               </li>
-              <li style="margin-left: 750px;" >
+              <li style="margin-left: 195px!important;">
+                <div style="position: absolute;">
+                <form class="d-flex" role="search" style="margin-top:1px!important; position: relative; ">
+                    <input class="form-control me-2" type="search" aria-label="Search" id="search-film" name="title" placeholder="Search Movie" onkeyup="searchFilm()"  style="width: 300px;">
+                    <ul id="search-results" ></ul>
+                </form>
+                </div>
               </li>
+
               <div style="display: flex; justify-content: flex-end; position: absolute; right: 10px;">
                 <li class="nav-item" th:if="${admin}" >
                   <a  class="nav-link" href="/usersList">AdminPanel</a>
