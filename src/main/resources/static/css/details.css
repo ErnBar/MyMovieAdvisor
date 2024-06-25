@@ -271,7 +271,14 @@ body {
 }
 
 
-
+.img-fixed-size {
+    transition: transform 0.25s ease;
+    cursor: pointer;
+  }
+  
+  .img-fixed-size:active {
+    transform: scale(1.6);
+  }
 
 #search-results {
     scrollbar-width: thin; 
