@@ -154,3 +154,9 @@ h1, h2, h3 {
 .toggle-button i, .hide-button i {
     margin-left: 5px;
 }
+
+.added-to-favorites {
+    background-color: #007bff!important;
+    color: white!important;
+    cursor: default!important;
+}

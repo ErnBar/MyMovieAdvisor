@@ -301,3 +301,10 @@ body {
 #search-results li:hover {
     background-color: rgba(41, 131, 190, 0.849);
 }
+
+.added-to-favorites {
+    background-color: #007bff!important;
+    color: white!important;
+    cursor: default!important;
+    border: none;
+}

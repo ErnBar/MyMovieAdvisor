@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/details.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.min.css" type="text/css">
     <script src="js/movieDetails.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
     <body>
@@ -78,14 +79,14 @@
                     </div>
             </div>
             <section>
-                <form th:action="@{/favoriteAssociation}" method="post">
+                <form id="favoriteForm" action="/favoriteAssociation" method="post">
                     <input type="hidden" name="movieId" th:value="${movie.id}"/>
                     <input type="hidden" name="userId" th:value="${loggedUser.id}"/>
-                    <button type="submit" class="btn btn-outline-light" style="font-weight: 500; position: relative; margin-left: 40%; " >Add to Favorites</button>
+                    <button id="addToFavoritesBtn" type="button" class="btn btn-outline-light" style="font-weight: 500; position: relative; margin-left: 40%;">Add to Favorites</button>
                 </form>
             </section>
             <br>
-            <div >
+            <div>
                 <P class="h4" style="text-align: center;">CAST</P>
             </div>
             <div th:if="${!#lists.isEmpty(actors)}">
@@ -209,6 +210,24 @@
         function hideForm(formId) {
             document.getElementById(formId).style.display = 'none';
         }
+
+        $(document).ready(function() {
+            $('#favoriteForm button').click(function(event) {
+            event.preventDefault(); // Evita il comportamento predefinito del pulsante
+            
+            let formData = $('#favoriteForm').serialize(); // Ottieni i dati del form
+
+            $.ajax({
+                type: 'POST',
+                url: '/favoriteAssociation', 
+                data: formData,
+                success: function(response) {
+                    $('#addToFavoritesBtn').text('Successfully Added');
+                    $('#addToFavoritesBtn').addClass('added-to-favorites');
+                }    
+                });
+            });
+        });
     </script>
 </body>
 </html>
