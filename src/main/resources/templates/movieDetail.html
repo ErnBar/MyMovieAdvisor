@@ -79,12 +79,12 @@
                     </div>
             </div>
             <section>
-                <form id="favoriteForm" action="/favoriteAssociation" method="post" th:if="${!userFvrt.contains(loggedUser)}">
+                <form id="favoriteForm" action="/favoriteAssociation" method="post" th:if="${!userFvrt}">
                     <input type="hidden" name="movieId" th:value="${movie.id}"/>
                     <input type="hidden" name="userId" th:value="${loggedUser.id}"/>
                     <button id="addToFavoritesBtn" type="button" class="btn btn-outline-light" style="font-weight: 500; position: relative; margin-left: 40%;">Add to Favorites</button>
                 </form>
-                <p class="h6" style="text-align: center;" th:if="${userFvrt.contains(loggedUser)}">Already in your favorite</p>
+                <p class="h6" style="text-align: center;" th:if="${userFvrt}">Already in your favorite</p>
             </section>
             <br>
             <div>

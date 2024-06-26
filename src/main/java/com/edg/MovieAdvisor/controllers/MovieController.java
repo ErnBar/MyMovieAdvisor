@@ -94,7 +94,7 @@ public class MovieController {
         model.addAttribute("actorsList", actors);
         model.addAttribute("movieReview", movie.getReviews());
         model.addAttribute("averageScore", averageScore);
-        model.addAttribute("userFvrt",movie.getFavoriteUserMovies());
+        model.addAttribute("userFvrt",movieService.isMovieFavoriteForUser(loggedUser,movie));
         return "movieDetail.html";
     }
 

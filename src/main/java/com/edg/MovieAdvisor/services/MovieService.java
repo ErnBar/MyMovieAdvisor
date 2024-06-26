@@ -62,4 +62,8 @@ public class MovieService {
     public List<MovieProjection> findAllMoviesOrderByAverageScoreDesc() {
         return movieRepository.findAllMoviesOrderByAverageScoreDesc();
     }
+
+    public boolean isMovieFavoriteForUser(User user,Movie movie) {
+        return movieRepository.existsByFavoriteUserMovies(user,movie);
+    }
 }

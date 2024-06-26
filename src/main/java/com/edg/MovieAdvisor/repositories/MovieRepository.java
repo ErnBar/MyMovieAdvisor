@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.edg.MovieAdvisor.models.Movie;
+import com.edg.MovieAdvisor.models.User;
 import com.edg.MovieAdvisor.projection.MovieProjection;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
@@ -15,4 +17,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<MovieProjection> findAllMoviesOrderByAverageScoreDesc();
 
     List<Movie> findByTitleStartingWith(String prefix);
+
+    @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM Movie m JOIN m.favoriteUserMovies u WHERE u = :user AND m = :movie")
+    boolean existsByFavoriteUserMovies(@Param("user") User user, @Param("movie") Movie movie);
 }
