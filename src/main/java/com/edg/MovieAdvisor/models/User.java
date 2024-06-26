@@ -2,6 +2,7 @@ package com.edg.MovieAdvisor.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -65,6 +66,20 @@ public class User {
     )
     @JsonManagedReference
     private List<Movie> favoriteMovies;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
     
